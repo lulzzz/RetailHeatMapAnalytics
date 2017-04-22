@@ -1,0 +1,27 @@
+{
+  "name": "retailanalyticsapp",
+  "version": "1.0.0",
+  "description": "application which displays crowd behavior and product placement analytics in a shopping mall",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skulai/RetailHeatMapAnalytics.git"
+  },
+  "keywords": [
+    "heatmap",
+    "angular",
+    "retail",
+    "analytics"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "mongojs": "^2.4.0"
+  }
+}
