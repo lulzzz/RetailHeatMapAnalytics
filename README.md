@@ -1,7 +1,5 @@
 # RetailHeatMapAnalytics
 This project provides retail owners to analyze crowd density and crowd behavior for maximum product marketing and sale
-
-
 Technologies:
 NodeJs
 AngularJs
@@ -13,4 +11,4 @@ ExpressJs
 
 
 Command to run the app
-node app.js
+-->node app.js
