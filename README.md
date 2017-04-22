@@ -12,3 +12,5 @@ MongoJs to interact with mongodb
 ExpressJs
 
 
+Command to run the app
+node app.js
