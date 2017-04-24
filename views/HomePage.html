@@ -27,7 +27,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400" rel="stylesheet">
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -39,6 +39,10 @@
 	<!-- Style -->
 	<link rel="stylesheet" href="css/style.css">
 
+	<link href='http://fonts.googleapis.com/css?family=Maven+Pro:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="css/mapstyle.css">
+	<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
+	<link rel="stylesheet" type="text/css" href="css/map.css">
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
@@ -56,13 +60,13 @@
 					<div class="navbar-header">
 						<!-- Mobile Toggle Menu Button -->
 						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-						<a class="navbar-brand" href="index.html">Retail Analytics for your Shopping Mall</a> 
+						<a class="navbar-brand" href="index.html">Retail Analytics for your Shopping Mall</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="active"><a href="#" data-nav-section="home"><span>Home</span></a></li>
 							<li><a href="#" data-nav-section="services"><span>Services</span></a></li>
-							<li><a href="#" data-nav-section="explore"><span>Portfolio</span></a></li>							
+							<li><a href="#" data-nav-section="explore"><span>Portfolio</span></a></li>
 							<li><a href="#" data-nav-section="Aboutus"><span>About us</span></a></li>
 						</ul>
 					</div>
@@ -77,8 +81,34 @@
 			<div class="text-wrap">
 				<div class="text-inner">
 					<div class="row">
-						<div class="col-md-8 col-md-offset-2 text-center">
-							
+						<div class="col-md-12 col-md-offset-2 text-center">
+							<section id="map-section" class="inner over">
+					<div class="editor-window">
+						<div class="window-mockup brown"></div>
+						<div class="editor-body">
+							<code>
+								{<br>
+								&nbsp;&nbsp;&nbsp;"id": "newlandmark",<br>
+								&nbsp;&nbsp;&nbsp;"title": "New Landmark",<br>
+								&nbsp;&nbsp;&nbsp;"description": "Creating a new landmark is that easy!",<br>
+								&nbsp;&nbsp;&nbsp;"x": "<span class="mapplic-coordinates-x">0.0000</span>",<br>
+								&nbsp;&nbsp;&nbsp;"y": "<span class="mapplic-coordinates-y">0.0000</span>",<br>
+								&nbsp;&nbsp;&nbsp;...<br>
+								}
+							</code>
+						</div>
+					</div>
+
+					<div class="map-container">
+						<div class="window-mockup">
+							<div class="window-bar"></div>
+						</div>
+						<!-- Map -->
+						<div id="mapplic"></div>
+					</div>
+				</section>
+
+
 						</div>
 					</div>
 				</div>
@@ -153,16 +183,16 @@
 							</div>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<section id="fh5co-explore" data-section="explore">
-		
+
 	</section>
-			
+
 	<section id="fh5co-blog" data-section="Aboutus">
 		<div class="fh5co-blog">
 			<div class="container">
@@ -177,8 +207,8 @@
 					</div>
 				</div>
 				<div class="row">
-					
-					
+
+
 					<div class="col-md-4 animate-box blog">
 						<a href="#" class="entry">
 							<div class="blog-bg" style="background-image: url(images/blog-3.jpg);">
@@ -237,7 +267,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 animate-box">
-					<h3 class="section-title">Retail Analytics for your store</h3>										
+					<h3 class="section-title">Retail Analytics for your store</h3>
 				</div>
 
 				<div class="col-md-4 animate-box">
@@ -276,11 +306,11 @@
 						</div>
 					</form>
 				</div>
-			</div>			
+			</div>
 		</div>
 	</div>
 
-	
+
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -296,6 +326,25 @@
 	<!-- Main JS (Do not remove) -->
 	<script src="js/main.js"></script>
 
+	<!-- Scripts -->
+			<script type="text/javascript" src="js/hammer.min.js"></script>
+			<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+			<script type="text/javascript" src="js/script.js"></script>
+			<script type="text/javascript" src="mapplic/mapplic.js"></script>
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var mapplic = $('#mapplic').mapplic({
+						source: 'mall.json',	// Using mall.json file as map data
+						sidebar: true, 			// Enable sidebar
+						minimap: true, 			// Enable minimap
+						markers: false, 		// Disable markers
+						fillcolor: false, 		// Disable default fill color
+						fullscreen: true, 		// Enable fullscreen
+						maxscale: 3 			// Setting maxscale to 3 times bigger than the original file
+					});
+				});
+			</script>
+
+
 	</body>
 </html>
-
