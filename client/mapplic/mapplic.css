@@ -339,7 +339,7 @@
 	50% {-webkit-transform: scale(1.6, 1.6); opacity: 0.0;}
 }
 
-/* Minimap */
+/* Minimap
 .mapplic-minimap {
 	border: 1px solid rgba(0, 0, 0, 0.1);
 	position: absolute;
@@ -362,6 +362,7 @@
 .mapplic-minimap img {
 	width: 100%;
 }
+*/
 
 .mapplic-minimap-overlay {
 	background-color: rgba(0, 0, 0, 0.4);

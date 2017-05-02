@@ -81,9 +81,9 @@
 					"zoom": "3"
 				},
 				{
-					"id": "macys",
-					"title": "Macy's",
-					"description": "Macy's <i>department</i> store",
+					"id": "walmart",
+					"title": "WALMART",
+					"description": "Walmart <i>department</i> store",
 					"category": "dep",
 					"thumbnail": "images/thumbs/macys.jpg",
 					"x": "0.2021",

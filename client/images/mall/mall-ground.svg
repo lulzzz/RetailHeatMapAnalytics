@@ -13,6 +13,17 @@
 <svg version="1.1" id="Layer_1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1000px" height="600px"
 	 viewBox="0 0 1000 600" enable-background="new 0 0 1000 600" xml:space="preserve">
+	 <defs>
+     <pattern id="pattern1" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+         <image height="1" width="1" preserveAspectRatio="none" xlink:href="images/walmart.jpg" />
+     </pattern>
+		 <pattern id="pattern2" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+         <image height="1" width="1" preserveAspectRatio="none" xlink:href="images/costco.png" />
+     </pattern>
+		 <pattern id="pattern3" height="100%" width="100%" patternContentUnits="objectBoundingBox">
+         <image height="1" width="1" preserveAspectRatio="none" xlink:href="images/target.png" />
+     </pattern>
+	 </defs>
 <metadata>
 	<sfw  xmlns="&ns_sfw;">
 		<slices></slices>
@@ -545,7 +556,7 @@
 <g id="landmarks-ground">
 	<polygon fill="#91BF39" points="698.6,172 719.4,199.6 670.7,209.9 650.6,181.8 	"/>
 	<polygon fill="#91BF39" points="760.3,211.3 767.6,220.6 746.2,225.4 739.1,215.9 	"/>
-	<polygon id="sears" fill="#72903A" points="718.2,126.2 814.2,119.3 896.9,213.9 804.6,234.8 795.8,223.7 763.9,230.8 758.6,224
+	<polygon id="target" fill="url(#pattern3)" points="718.2,126.2 814.2,119.3 896.9,213.9 804.6,234.8 795.8,223.7 763.9,230.8 758.6,224
 		770.1,221.4 761.9,210.9 782.1,206.5 768.3,189.3 721,199.3 692.1,161 738.5,151.8 	"/>
 	<polygon fill="#91BF39" points="750.7,235.1 764.3,253.1 719.3,263.4 716.8,242.7 	"/>
 	<polygon fill="#91BF39" points="589.5,177 600.7,193.8 575.1,198.9 564.1,182 	"/>
@@ -585,14 +596,14 @@
 	<polygon id="hnm" fill="#91BF39" points="540.2,290.2 544.6,297.8 563.1,293.6 595.2,347 547.4,358.7 539.4,344.4 512.7,334.8
 		493.9,300.6 512.3,296.5 	"/>
 	<polygon fill="#91BF39" points="596,348.4 617.8,366.9 560.2,381.4 548.2,360.1 	"/>
-	<polygon id="jcpenney" fill="#72903A" points="727,341.1 782.2,421.1 774.4,441.8 619.2,485.9 589.6,474.7 541.7,387.7
+	<polygon id="costco" fill="url(#pattern2)" points="727,341.1 782.2,421.1 774.4,441.8 619.2,485.9 589.6,474.7 541.7,387.7
 		622.9,367.3 631.8,381.9 669.9,372.1 660.7,357.8 	"/>
 	<polygon fill="#91BF39" points="335.6,247.5 350.4,279.7 330,284 315.6,251.5 	"/>
 	<polygon fill="#91BF39" points="313.7,251.9 325.2,277.8 292.9,284.6 282,258.4 	"/>
 	<polygon id="walgreens" fill="#91BF39" points="474.6,305 493.1,339.5 487.2,348.8 437.5,360.6 426.2,337.8 447.6,332.9
 		437.7,313.3 	"/>
 	<polygon id="belk" fill="#91BF39" points="407.9,304.8 435.8,313.7 445,331.9 423.6,336.9 435.5,361.1 374.2,375.7 348.4,318 	"/>
-	<polygon id="macys" fill="#72903A" points="261,285.4 279.9,333.1 346.4,318.4 368.8,368.7 305.7,383.6 315,406.8 134.4,450.5
+	<polygon id="walmart" fill="url(#pattern1)" points="261,285.4 279.9,333.1 346.4,318.4 368.8,368.7 305.7,383.6 315,406.8 134.4,450.5
 		105.3,438.7 75.3,324.1 	"/>
 	<path id="first-floor" fill="#333333" d="M565.9,242.7l-10.8,2.3c-0.3,0.1-0.5,0.1-0.6,0.2c-0.2,0.1-0.3,0.2-0.4,0.3
 		c-0.1,0.1-0.1,0.3-0.1,0.4c0,0.1,0.1,0.3,0.2,0.5l4.7,7.7c0.1,0.2,0.2,0.3,0.4,0.4s0.3,0.2,0.5,0.3s0.4,0.1,0.6,0.1s0.5,0,0.7-0.1
@@ -809,6 +820,7 @@
 		c-0.1,0-0.3-0.1-0.5-0.1s-0.4,0-0.6,0s-0.4,0-0.6,0C167.7,264,167.4,264,167.2,264.1"/>
 	<path fill="#FFFFFF" d="M180.1,263.8l0.6-2.7l2.2,2.1L180.1,263.8 M181.2,259.7l-1.9,0.4l-1.6,6.8l1.8-0.4l0.4-1.6l4-0.8l1.4,1.3
 		l1.8-0.4L181.2,259.7"/>
+  <text x="0" y="15" fill="red">WALMART</text>
 	<path fill="#FFFFFF" d="M228.6,350.2c-0.6,0.1-1.1,0.3-1.5,0.6c-0.4,0.3-0.8,0.6-1.1,0.9s-0.5,0.7-0.6,1.1s-0.1,0.8,0.1,1.2
 		c0.1,0.4,0.3,0.7,0.6,1s0.6,0.5,0.9,0.7s0.9,0.3,1.4,0.4c0.6,0.1,1.2,0.1,2,0.1s1.5,0.1,2.1,0.2s1.1,0.2,1.6,0.4
 		c0.4,0.2,0.8,0.4,1.1,0.6s0.5,0.5,0.6,0.8c0.1,0.4,0.2,0.8,0.1,1.2c-0.1,0.4-0.3,0.8-0.6,1.1s-0.7,0.7-1.1,0.9
