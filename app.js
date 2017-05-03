@@ -1,8 +1,12 @@
 var express = require('express');
-var path = require('path');
+
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var heatmap = require('./routes/heatmap');
+var analytics = require('./routes/analytics');
+var http = require('http');
+var path = require('path');
 
 var port =3000;
 var app = express();
@@ -15,7 +19,26 @@ app.engine('html', require('ejs').renderFile);
 //set static folder for angularjs
 app.use(express.static(path.join(__dirname, 'client')))
 
+
+app.use(bodyParser.urlencoded());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+
 app.use('/',index);
+app.post('/getheatmapdaily',heatmap.getdaily);
+app.post('/getheatmaphourly',heatmap.gethourly);
+app.post('/getheatmapmonthly',heatmap.getmonthly);
+app.post('/getheatmapyearly',heatmap.getyearly);
+app.post('/heatmapdaily',heatmap.postdaily);
+
+app.post('/getanalyticsdaily',analytics.getdaily);
+app.post('/analyticsdaily',analytics.postdaily);
+
+
 
 app.listen(port, function(){
   console.log('Server started on port '+ port);
