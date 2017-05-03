@@ -5,7 +5,7 @@ var mongo = require("./mongo");
 var mongoURL = "mongodb://cmpe280:cmpe280@ds129281.mlab.com:29281/cmpe280";
 var ejs = require('ejs');
 
-exports.getmontlhly=function(req,res){
+exports.getmonthly=function(req,res){
 
     var store=req.param('storename');
     var end = new Date(2017, 04, 30);
@@ -35,8 +35,9 @@ exports.getmontlhly=function(req,res){
 exports.getyearly=function(req,res){
 
     var store=req.param('storename');
-    var end = new Date(2017, 04, 30);
-    var start = new Date(2017, 04, 01);
+    var year = req.param('year');
+    var end = new Date(year, 13, 31);
+    var start = new Date(2017, 01, 01);
 
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
@@ -122,7 +123,7 @@ exports.postdaily=function(req,res){
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('heatmapdaily');
-        coll.insertOne({"timestamp" : new Date(),
+        coll.insertOne({"timestamp" : new Date('2016-12-04T20:19:31.157Z'),
             "store" : store,
             "coord":coord
 
