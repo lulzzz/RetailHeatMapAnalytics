@@ -31,6 +31,8 @@
     <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
   	<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
   	<link rel="stylesheet" type="text/css" href="css/map.css">
+    
+     <script src='https://www.patrick-wied.at/static/heatmapjs/assets/js/heatmap.min.js'></script>
 
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
 
@@ -41,6 +43,31 @@
   	<script src="js/respond.min.js"></script>
   	<![endif]-->
     <style>
+		
+		#target{
+
+		background: no-repeat;
+		width: 100%;
+		height: 100%	
+
+	}
+	#costco{
+
+		background: no-repeat;
+		width: 100%;
+		height: 100%	
+
+	}
+		#walmart{
+
+		background: no-repeat;
+		width: 100%;
+		height: 100%	
+
+	}
+		
+		
+		
     img {
       max-width: 100%;
       max-height: 100%;
@@ -113,7 +140,7 @@
                                     <a href="#">Walmart <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a ng-click="costcoStore()">Store Page</a>
+                                            <a ng-click="walmartStore()">Store Page</a>
                                         </li>
                                         <li>
                                             <a href="#">HeatMap</a>
@@ -205,46 +232,237 @@
                                 <div class="col-lg-12" id= "targetStoreMap" ng-show="targetStoreMap">
                                   <div class="panel-heading">
 
-                                      <div>
                                         <ul class="nav nav-tabs">
-                                        <li role="presentation" class="active"><a ng-click="targetStore()">Store</a></li>
-                                        <li role="presentation"><a href="#">HeatMap</a></li>
+                                        <li role="presentation" class="active"><a data-toggle="tab" href="#target_store">Store</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#target_heatmap">HeatMap</a></li>
                                         <li role="presentation"><a href="#">Messages</a></li>
                                         </ul>
-                                      </div>
-                                  </div>
-                                  <h3 align="center"> Welcome to Target</h3>
+                                        
+									  <div class="tab-content">
+									  
+									   <div id="target_store" class="tab-pane fade">
+										  <h3 align="center"> Welcome to Target</h3>
                                   <img src="images/store/12.jpg">
+										  	
+										  	
+										  </div> <!--END target_store-->
+									  
+									  
+									  	
+										  <div id="target_heatmap" class="tab-pane fade">
+										  <h3 align="center">Current HeatMap</h3>
+										  
+										  <div id='target' class="col-lg-12">
+                  <img src="images/store3.jpeg" onload="targetHeatmap()">
+								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
+								</div> <!--END target-->
+									   <script>
+    // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
+
+	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
+								function targetHeatmap(){		   
+										   
+	var config3 = {
+		container: document.getElementById('target'),
+		radius: 17,
+		maxOpacity: 1,
+  minOpacity: 0,
+  blur: .5,
+
+	};
+  var heatmapInstance = h337.create(config3);
+
+  var testData3 = {
+        min: 0,
+        max: 3,
+        data: [{x: 120, y: 110, value: 1}, {x: 121, y: 111, value: 1}, {x: 122, y: 100, value: 1}, {x: 132, y: 200, value: 1}, {x: 160, y: 94, value: 1}, {x: 119, y: 201, value: 1}, {x: 142, y: 168, value: 1}]
+  };
+  heatmapInstance.setData(testData3);
+
+	for (i=0;i<5;i++){
+	var dataPoints3 = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+
+	function getRandomIndex (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+	var getrandomDensity = [dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)]]
+
+	heatmapInstance.addData(getrandomDensity);
+
+	}
+
+								}
+
+</script>
+
+										  
+										  	
+										  	
+										  </div> <!--END target_heatmap-->
+									  	
+									  </div>  <!--END tab-content-->
+                                     
+                                     
+                                      
+                                      
+                                  </div>
+                                  
                                     <!-- /.table-responsive -->
                                 </div>
                                 <div class="col-lg-12" id= "walmartStoreMap" ng-show="walmartStoreMap">
                                   <div class="panel-heading">
 
-                                      <div>
+                                     
                                         <ul class="nav nav-tabs">
-                                        <li role="presentation" class="active"><a ng-click="walmartStore()">Store</a></li>
-                                        <li role="presentation"><a href="#">HeatMap</a></li>
+                                        <li role="presentation" class="active"><a data-toggle="tab" href="#walmart_store">Store</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#walmart_heatmap">HeatMap</a></li>
                                         <li role="presentation"><a href="#">Messages</a></li>
                                         </ul>
-                                      </div>
-                                  </div>
-                                  <h3 align="center"> Welcome to Walmart</h3>
+                                        
+                                        <div class="tab-content">
+									  
+									   <div id="walmart_store" class="tab-pane fade">
+										  <h3 align="center"> Welcome to Walmart</h3>
                                   <img src="images/store/3.jpg">
+										  	
+										  	
+										  </div> <!--END walmart_store-->
+									  
+									  
+									  	
+										  <div id="walmart_heatmap" class="tab-pane fade">
+										  <h3 align="center">Current HeatMap</h3>
+										  
+										  <div id='walmart' class="col-lg-12">
+                  <img src="images/store2.jpeg" onload="walmartHeatmap()">
+								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
+								</div> <!--END target-->
+									   <script>
+    // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
+
+	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
+								function walmartHeatmap(){		   
+										   
+	var config3 = {
+		container: document.getElementById('walmart'),
+		radius: 17,
+		maxOpacity: 1,
+  minOpacity: 0,
+  blur: .5,
+
+	};
+  var heatmapInstance = h337.create(config3);
+
+  var testData3 = {
+        min: 0,
+        max: 3,
+        data: [{x: 120, y: 110, value: 1}, {x: 121, y: 111, value: 1}, {x: 122, y: 100, value: 1}, {x: 132, y: 200, value: 1}, {x: 160, y: 94, value: 1}, {x: 119, y: 201, value: 1}, {x: 142, y: 168, value: 1}]
+  };
+  heatmapInstance.setData(testData3);
+
+	for (i=0;i<5;i++){
+	var dataPoints3 = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+
+	function getRandomIndex (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+	var getrandomDensity = [dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)]]
+
+	heatmapInstance.addData(getrandomDensity);
+
+	}
+
+								}
+
+</script>
+
+										  
+										  	
+										  	
+										  </div> <!--END target_heatmap-->
+									  	
+									  </div>  <!--END tab-content-->
+                                      
+                                  </div>
+                                  
                                     <!-- /.table-responsive -->
                                 </div>
                                 <div class="col-lg-12" id= "costcoStoreMap" ng-show="costcoStoreMap">
                                   <div class="panel-heading">
 
-                                      <div>
+                                      
                                         <ul class="nav nav-tabs">
-                                        <li role="presentation" class="active"><a ng-click="costcoStore()">Store</a></li>
-                                        <li role="presentation"><a href="#">HeatMap</a></li>
+                                        <li role="presentation" class="active"><a a data-toggle="tab" href="#costco_store">Store</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#costco_heatmap">HeatMap</a></li>
                                         <li role="presentation"><a href="#">Messages</a></li>
                                         </ul>
-                                      </div>
-                                  </div>
-                                <h3 align="center"> Welcome to Costco</h3>
+                                        
+                                          <div class="tab-content">
+									  
+									   <div id="costco_store" class="tab-pane fade">
+										  <h3 align="center"> Welcome to Costco</h3>
                                   <img src="images/store/1.jpg">
+										  	
+										  	
+										  </div> <!--END target_store-->
+									  
+									  
+									  	
+										  <div id="costco_heatmap" class="tab-pane fade">
+										  <h3 align="center">Current HeatMap</h3>
+										  
+										  <div id='costco' class="col-lg-12">
+                                    <img src="images/store1.jpeg" onload="costcoHeatmap()">
+								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
+								</div> <!--END target-->
+									   <script>
+    // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
+
+	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
+								function costcoHeatmap(){		   
+										   
+	var config3 = {
+		container: document.getElementById('costco'),
+		radius: 17,
+		maxOpacity: 1,
+  minOpacity: 0,
+  blur: .5,
+
+	};
+  var heatmapInstance = h337.create(config3);
+
+  var testData3 = {
+        min: 0,
+        max: 3,
+        data: [{x: 120, y: 110, value: 1}, {x: 121, y: 111, value: 1}, {x: 122, y: 100, value: 1}, {x: 132, y: 200, value: 1}, {x: 160, y: 94, value: 1}, {x: 119, y: 201, value: 1}, {x: 142, y: 168, value: 1}]
+  };
+  heatmapInstance.setData(testData3);
+
+	for (i=0;i<5;i++){
+	var dataPoints3 = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+
+	function getRandomIndex (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+	var getrandomDensity = [dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)]]
+
+	heatmapInstance.addData(getrandomDensity);
+
+	}
+
+								}
+
+</script>
+
+										  
+										  	
+										  	
+										  </div> <!--END target_heatmap-->
+									  	
+									  </div>  <!--END tab-content-->
+                                    
+                                  </div>
+                                
                                     <!-- /.table-responsive -->
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
@@ -442,8 +660,9 @@
                 });*/
 
               </script>
-
+             
 
 </body>
+
 
 </html>
