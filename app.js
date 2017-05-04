@@ -27,8 +27,12 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
+var html_dir = './views/';
 app.use('/',index);
+app.get('/past', function(req, res){
+  res.sendFile(html_dir +'past.html');
+});
+
 app.post('/getheatmapdaily',heatmap.getdaily);
 app.post('/getheatmaphourly',heatmap.gethourly);
 app.post('/getheatmapmonthly',heatmap.getmonthly);
