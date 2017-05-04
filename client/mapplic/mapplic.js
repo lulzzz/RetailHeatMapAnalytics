@@ -693,11 +693,11 @@
 
 			this.init = function() {
 				// Fullscreen Button
-				$('<a></a>').attr('href', '#').attr('href', '#').addClass('mapplic-fullscreen-button').click(function(e) {
+				/*$('<a></a>').attr('href', '#').attr('href', '#').addClass('mapplic-fullscreen-button').click(function(e) {
 					e.preventDefault();
 					self.el.toggleClass('mapplic-fullscreen');
 					$(document).resize();
-				}).appendTo(self.container);
+				}).appendTo(self.container);*/
 
 				// Esc key
 				$(document).keyup(function(e) {

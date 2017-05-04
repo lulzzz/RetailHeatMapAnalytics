@@ -31,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
   	<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
   	<link rel="stylesheet" type="text/css" href="css/map.css">
-    
+
      <script src='https://www.patrick-wied.at/static/heatmapjs/assets/js/heatmap.min.js'></script>
 
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
@@ -43,31 +43,31 @@
   	<script src="js/respond.min.js"></script>
   	<![endif]-->
     <style>
-		
+
 		#target{
 
 		background: no-repeat;
 		width: 100%;
-		height: 100%	
+		height: 100%
 
 	}
 	#costco{
 
 		background: no-repeat;
 		width: 100%;
-		height: 100%	
+		height: 100%
 
 	}
 		#walmart{
 
 		background: no-repeat;
 		width: 100%;
-		height: 100%	
+		height: 100%
 
 	}
-		
-		
-		
+
+
+
     img {
       max-width: 100%;
       max-height: 100%;
@@ -237,21 +237,21 @@
                                         <li role="presentation"><a data-toggle="tab" href="#target_heatmap">HeatMap</a></li>
                                         <li role="presentation"><a href="#">Messages</a></li>
                                         </ul>
-                                        
+
 									  <div class="tab-content">
-									  
+
 									   <div id="target_store" class="tab-pane fade">
 										  <h3 align="center"> Welcome to Target</h3>
                                   <img src="images/store/12.jpg">
-										  	
-										  	
+
+
 										  </div> <!--END target_store-->
-									  
-									  
-									  	
+
+
+
 										  <div id="target_heatmap" class="tab-pane fade">
 										  <h3 align="center">Current HeatMap</h3>
-										  
+
 										  <div id='target' class="col-lg-12">
                   <img src="images/store3.jpeg" onload="targetHeatmap()">
 								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
@@ -260,8 +260,8 @@
     // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
 
 	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
-								function targetHeatmap(){		   
-										   
+								function targetHeatmap(){
+
 	var config3 = {
 		container: document.getElementById('target'),
 		radius: 17,
@@ -295,44 +295,44 @@
 
 </script>
 
-										  
-										  	
-										  	
+
+
+
 										  </div> <!--END target_heatmap-->
-									  	
+
 									  </div>  <!--END tab-content-->
-                                     
-                                     
-                                      
-                                      
+
+
+
+
                                   </div>
-                                  
+
                                     <!-- /.table-responsive -->
                                 </div>
                                 <div class="col-lg-12" id= "walmartStoreMap" ng-show="walmartStoreMap">
                                   <div class="panel-heading">
 
-                                     
+
                                         <ul class="nav nav-tabs">
                                         <li role="presentation" class="active"><a data-toggle="tab" href="#walmart_store">Store</a></li>
                                         <li role="presentation"><a data-toggle="tab" href="#walmart_heatmap">HeatMap</a></li>
                                         <li role="presentation"><a href="#">Messages</a></li>
                                         </ul>
-                                        
+
                                         <div class="tab-content">
-									  
+
 									   <div id="walmart_store" class="tab-pane fade">
 										  <h3 align="center"> Welcome to Walmart</h3>
                                   <img src="images/store/3.jpg">
-										  	
-										  	
+
+
 										  </div> <!--END walmart_store-->
-									  
-									  
-									  	
+
+
+
 										  <div id="walmart_heatmap" class="tab-pane fade">
 										  <h3 align="center">Current HeatMap</h3>
-										  
+
 										  <div id='walmart' class="col-lg-12">
                   <img src="images/store2.jpeg" onload="walmartHeatmap()">
 								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
@@ -341,8 +341,8 @@
     // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
 
 	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
-								function walmartHeatmap(){		   
-										   
+								function walmartHeatmap(){
+
 	var config3 = {
 		container: document.getElementById('walmart'),
 		radius: 17,
@@ -376,41 +376,41 @@
 
 </script>
 
-										  
-										  	
-										  	
+
+
+
 										  </div> <!--END target_heatmap-->
-									  	
+
 									  </div>  <!--END tab-content-->
-                                      
+
                                   </div>
-                                  
+
                                     <!-- /.table-responsive -->
                                 </div>
                                 <div class="col-lg-12" id= "costcoStoreMap" ng-show="costcoStoreMap">
                                   <div class="panel-heading">
 
-                                      
+
                                         <ul class="nav nav-tabs">
                                         <li role="presentation" class="active"><a a data-toggle="tab" href="#costco_store">Store</a></li>
                                         <li role="presentation"><a data-toggle="tab" href="#costco_heatmap">HeatMap</a></li>
                                         <li role="presentation"><a href="#">Messages</a></li>
                                         </ul>
-                                        
+
                                           <div class="tab-content">
-									  
+
 									   <div id="costco_store" class="tab-pane fade">
 										  <h3 align="center"> Welcome to Costco</h3>
                                   <img src="images/store/1.jpg">
-										  	
-										  	
+
+
 										  </div> <!--END target_store-->
-									  
-									  
-									  	
+
+
+
 										  <div id="costco_heatmap" class="tab-pane fade">
 										  <h3 align="center">Current HeatMap</h3>
-										  
+
 										  <div id='costco' class="col-lg-12">
                                     <img src="images/store1.jpeg" onload="costcoHeatmap()">
 								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
@@ -419,8 +419,8 @@
     // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
 
 	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
-								function costcoHeatmap(){		   
-										   
+								function costcoHeatmap(){
+
 	var config3 = {
 		container: document.getElementById('costco'),
 		radius: 17,
@@ -454,15 +454,15 @@
 
 </script>
 
-										  
-										  	
-										  	
+
+
+
 										  </div> <!--END target_heatmap-->
-									  	
+
 									  </div>  <!--END tab-content-->
-                                    
+
                                   </div>
-                                
+
                                     <!-- /.table-responsive -->
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
@@ -507,18 +507,7 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-
+                    
 
                         <!-- /.panel-footer -->
                     </div>
@@ -660,7 +649,7 @@
                 });*/
 
               </script>
-             
+
 
 </body>
 
