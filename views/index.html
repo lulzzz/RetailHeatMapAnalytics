@@ -51,6 +51,18 @@
   	<!--[if lt IE 9]>
   	<script src="js/respond.min.js"></script>
   	<![endif]-->
+    <style>
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+	  #targetMap{
+      width: 100%;
+    }
+	  path{stroke:none!important;}
+	  circle{fill: red!important;
+	  stroke: blue!important;}
+    </style>
 
 </head>
 
@@ -234,69 +246,16 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>$321.33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>$234.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>$724.17</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>$23.71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>$8345.23</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3321</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:23 PM</td>
-                                                    <td>$245.12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3320</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:15 PM</td>
-                                                    <td>$5663.54</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3319</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:13 PM</td>
-                                                    <td>$943.45</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="col-lg-12" id= "targetStoreMap">
+                                  <img src="images/store/12.jpg">
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <div class="col-lg-12" id= "walmartStoreMap">
+                                  <img src="images/store/3.jpg">
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <div class="col-lg-12" id= "costcoStoreMap">
+                                  <img src="images/store/1.jpg">
                                     <!-- /.table-responsive -->
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
@@ -416,6 +375,84 @@
     					});
     				});
     			</script>
+
+    <script src="js/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
+
+    <script>
+	//http://zreference.com/raphael-animation-along-a-path/
+      /*$(function(){
+           Raphael.fn.addGuides = function() {
+              this.ca.guide = function(g) {
+                return {
+                  guide: g
+                };
+              };
+              this.ca.along = function(percent) {
+                var g = this.attr("guide");
+                var len = g.getTotalLength();
+                var point = g.getPointAtLength(percent * len);
+                var t = {
+                  transform: "t" + point.x + " " + point.y
+                };
+                return t;
+              };
+            };
+
+            function getRandomInt(min, max) {
+              return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+                  var p = new Raphael(0,0,"100%","100%");
+
+                  // give raphael guide and along custom attributes
+                  p.addGuides();
+
+                  var white = {stroke : "white"};
+          		      var blue = {stroke : "blue!important"};
+                  var path;
+
+                var path1 = p.path("M 100 230 L 110 550  L 230 580 L 600 580 L 600 230 L 900 230 L 900 450 L 580 450 L 580 250 z").attr(white);
+          	  var path2 = p.path("M 50 200 L 50 380 L 200 520 L 350 380 L 350 230 L 600 230 z").attr(white);
+
+                var path3 = p.path("M 300 260 L 900 260 L 900 70 L 1100 70 L 900 120 L 900 260 z").attr(white);
+                var path4 = p.path("M 300 240 L 900 240 L 900 470 L 760 460 L 760 240 L 400 240 z").attr(white);
+
+           // var path3 = p.path("M 70 30 Q 50 350  L 70 600 L 530 600 L 530 30 z").attr(blue);
+          	//  var path4 =  p.path("M 20 60 Q 20 350  L 20 310 L 530 320 L 530 60 z").attr(blue);
+          	  	//  var path5 =  p.path("M 50 30 Q 50 350  L 50 310 L 530 320 L 530 310 L 590 30 z").attr(blue);
+                //  var path2 = p.path("M 300 100 Q 350 350 400 10 50 60 100 600 100 50 100").attr(white);
+                      var _people = 12;
+          		var _heads = 0;
+          		for(var i=1;i<=_people;i++){
+          	var path;
+          	if(i%4==0)path = path1;
+          	if(i%4==1)path = path2;
+          	if(i%4==2)path = path3;
+          	if(i%4==3)path = path4;
+
+          		// var path = (i%2==0)?path1: path2;
+          p.circle(0, 0, 10).attr(white).attr({guide : path, along : 0})
+                      .animate({along : 1}, getRandomInt(20000, 400000), "ease-out");
+          		}
+
+
+                  $(document).on("click", function(){
+                    // animate along a path
+
+
+          	$.each(_heads, function( i, val ) {
+          	var path = (i%2==0)?path1: path2;
+          	console.log($(this));
+            $(this).attr({guide : path1, along : 0})
+                      .animate({along : 1}, 300000, "ease-out");
+
+          });
+                  });
+
+                });*/
+
+              </script>
+
 
 </body>
 
