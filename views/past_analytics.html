@@ -1,0 +1,432 @@
+	<!DOCTYPE html>
+	<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Application which provides retail owners a means to analyze crowd density" />
+		<meta name="keywords" content="retail, heatmap, crowd, density, beahvior" />
+		<meta name="author" content="Shruthi Kulai, Taruna Arora, Mukul Bajpai, Ravali Peddi, Jagmohan Singh" />
+
+		<title>Retail Heat Map Analytics</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- MetisMenu CSS -->
+		<link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+		<!-- Morris Charts CSS -->
+		<link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!--styles for directory map -->
+		<link rel="stylesheet" type="text/css" href="css/mapstyle.css">
+		<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
+		<link rel="stylesheet" type="text/css" href="css/map.css">
+
+		 <script src='js/heatmap.min.js'></script>
+
+		<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+		 <!-- Modernizr JS -->
+		<script src="js/modernizr-2.6.2.min.js"></script>
+			<!-- jQuery -->
+
+		<script src="js/jquery.min.js"></script>
+		<!-- jQuery Easing -->
+		<script src="js/jquery.easing.1.3.js"></script>
+		<!-- Bootstrap -->
+		<script src="js/bootstrap.min.js"></script>
+			<script src="js/controller.js"></script>
+		<!-- Waypoints -->
+		<script src="js/jquery.waypoints.min.js"></script>
+		<!-- Stellar Parallax -->
+		<script src="js/jquery.stellar.min.js"></script>
+		<!-- Counters -->
+		<script src="js/jquery.countTo.js"></script>
+		<!-- Main JS (Do not remove) -->
+		<script src="js/main.js"></script>
+
+
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+		<!-- Morris Charts JavaScript
+		<script src="../vendor/raphael/raphael.min.js"></script>
+	   <script src="../vendor/morrisjs/morris.min.js"></script>
+		<script src="../data/morris-data.js"></script>-->
+
+		<!-- Custom Theme JavaScript -->
+		<script src="../dist/js/sb-admin-2.js"></script>
+
+			<!-- Scripts -->
+		<!-- FOR IE9 below -->
+		<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+		<style>
+
+			#target{
+
+			background: no-repeat;
+			width: 100%;
+			height: 100%
+
+		}
+		.carousel-caption {top:320px !important;}
+		#costco{
+
+			background: no-repeat;
+			width: 100%;
+			height: 100%
+
+		}
+			#walmart{
+
+			background: no-repeat;
+			width: 100%;
+			height: 100%
+
+		}
+
+
+
+		img {
+		  max-width: 100%;
+		  max-height: 100%;
+		}
+		  #targetMap{
+		  width: 100%;
+		}
+		  path{stroke:none!important;}
+		  circle{fill: red!important;
+		  stroke: blue!important;}
+		</style>
+	  <style>
+		.row{display: block;}
+	#disply_st1,#disply_st2,#disply_st3 {display: block; position:relative}
+		img {
+		  max-width: 100%;
+		  max-height: 100%;
+		}
+		 #target_store svg{overflow: hidden;
+		position: absolute !important;
+	  left:0px!important;right;
+	top:0px;!important;}
+		  #target_store{
+		  width: 100%;
+		  left:0px!important;
+		  top:0px!important;
+		  margin:0px !important;
+		  padding: 0px!important;
+		}
+		 #myCarousel{    height: 470px;
+		overflow: hidden;}
+		</style>
+		<style>
+		
+		
+	.past_map{	
+		 width: 1269px;
+		height: 650px;
+		display: block;
+	}
+		#heatMap {
+		background: no-repeat;
+		display: block;
+		width: 100%;
+		height: 100%;}
+		
+		@import url('http://getbootstrap.com/dist/css/bootstrap.css');
+		</style>
+	
+	</head>
+
+	<body ng-app="prod" ng-controller="ProdController">
+
+		<div id="wrapper" >
+
+			<!-- Navigation -->
+			<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			  <h3 align="center">Retail Heat Map Analytics</h3>
+
+
+				<div class="navbar-default sidebar" role="navigation">
+					<div class="sidebar-nav navbar-collapse">
+						<ul class="nav" id="side-menu">
+
+							<li>
+								<a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+							</li>
+
+							<li>
+								<a href="#"><i class="fa fa-sitemap fa-fw"></i> Our Stores<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level">
+
+									<li>
+										<a href="#">Costco <span class="fa arrow"></span></a>
+										<ul class="nav nav-third-level">
+											<li>
+												<a ng-click="costcoStore()">Store Page</a>
+											</li>
+											<li>
+												<a href="#">HeatMap</a>
+											</li>
+											<li>
+												<a href="#">Recommendation</a>
+											</li>
+
+										</ul>
+										<!-- /.nav-third-level -->
+									</li>
+									<li>
+										<a href="#">Target <span class="fa arrow"></span></a>
+										<ul class="nav nav-third-level">
+											<li>
+												<a ng-click="targetStore()">Store Page</a>
+											</li>
+											<li>
+												<a href="#">HeatMap</a>
+											</li>
+											<li>
+												<a href="#">Recommendation</a>
+											</li>
+
+										</ul>
+										<!-- /.nav-third-level -->
+									</li>
+
+									<li>
+										<a href="#">Walmart <span class="fa arrow"></span></a>
+										<ul class="nav nav-third-level">
+											<li>
+												<a ng-click="walmartStore()">Store Page</a>
+											</li>
+											<li>
+												<a href="#">HeatMap</a>
+											</li>
+											<li>
+												<a href="#">Recommendation</a>
+											</li>
+
+										</ul>
+										<!-- /.nav-third-level -->
+									</li>
+								</ul>
+								<!-- /.nav-second-level -->
+							</li>
+
+							  <li>
+							<a href="#"><i class="fa fa-table fa-fw"></i> About Us</a>
+						  </li>
+						  <li>
+							<a href="#"><i class="fa fa-edit fa-fw"></i> Contact Us</a>
+						  </li>
+						  <li>
+							<a href="forms.html"><i class="fa fa-edit fa-fw"></i> Feedback</a>
+						  </li>
+
+
+						</ul>
+					</div>
+					<!-- /.sidebar-collapse -->
+				</div>
+				<!-- /.navbar-static-side -->
+			</nav>
+
+			<nav class="navbar navbar-default navbar-fixed-top">
+			  <div class="container">
+				<ul class="nav nav-pills">
+	  <li role="presentation" ><a href="/">Home</a></li>
+	  <li role="presentation" class="active"><a href="/past">Past Analytics</a></li>
+
+	</ul>
+
+			</nav>
+
+			<div id="page-wrapper">
+		  
+
+				<!-- /.row -->
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+						  <div class="container">
+
+	  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+		  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		  <li data-target="#myCarousel" data-slide-to="1"></li>
+		  <li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+		  <div class="item">
+			<img src="../images/walmart.jpg" alt="Walmart" style="width:100%;">
+			<div class="carousel-caption">
+			  <h3>Walmart</h3>
+			 
+			<button ng-click="toggleModal('store1.jpeg','Walmart')">Go!</button>
+			<!--<button ng-click="ShowHide('store1.jpeg')">Go!</button>-->
+		
+			</div>
+		  </div>
+		  <div class="item active">
+			<img src="../images/costco.jpg" alt="Costco" style="width:100%;">
+			<div class="carousel-caption">
+			  <h3>Costco</h3>
+			  <button ng-click="ShowHide('store3.jpeg')">Go!</button>
+			</div>
+		  </div>
+
+		  <div class="item">
+			<img src="../images/target.jpg" alt="Target" style="width:100%;">
+			<div class="carousel-caption">
+			  <h3>Target</h3>
+			<button ng-click="ShowHide('store2.jpeg')">Go!</button>
+			</div>
+		  </div>
+
+
+
+		</div>
+		    
+  <modal title="Enter Date" visible="showModal">
+    <form role="form">
+
+      <div class="form-group">
+     
+	  <p>Date: <input type="text" id="datepicker" /></p></div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+	
+	</modal>
+
+		<!-- Left and right controls -->
+		<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+		  <span class="glyphicon glyphicon-chevron-left"></span>
+		  <span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#myCarousel" data-slide="next">
+		  <span class="glyphicon glyphicon-chevron-right"></span>
+		  <span class="sr-only">Next</span>
+		</a>
+	  </div>
+	</div>
+
+						</div>
+				  
+
+						<!-- /.panel -->
+					</div>
+					<!-- /.col-lg-8 -->
+					 </div>
+					<!-- /.col-lg-4 -->
+				
+				
+				
+			
+
+					  <!-- /.panel -->
+				   
+								<div class="row" ng-show = "IsVisible" style="margin: -40px;">
+									<div class="col-lg-12">
+									  <div class="panel-content">
+						<div class="past_map">
+	  <div id='heatMap' ng-style="backimage">
+		<canvas  id ="myCanvas"  style=" width: 100%; height: 100%; position:absolute"></canvas>
+	  </div>
+	</div>
+
+									  </div>
+
+										<!-- /.table-responsive -->
+									</div>
+								   
+									<!-- /.col-lg-8 (nested) -->
+								</div>
+								<!-- /.row -->
+					 
+		
+				<!-- /.row -->
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+	</div>
+	
+					<script type="text/javascript" src="js/hammer.min.js"></script>
+					<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+					<script type="text/javascript" src="js/script.js"></script>
+					<script type="text/javascript" src="mapplic/mapplic.js"></script>
+					<script type="text/javascript">
+						$(document).ready(function() {
+							var mapplic = $('#mapplic').mapplic({
+								source: 'mall.json',	// Using mall.json file as map data
+								sidebar: true, 			// Enable sidebar
+								minimap: true, 			// Enable minimap
+								markers: false, 		// Disable markers
+								fillcolor: false, 		// Disable default fill color
+								fullscreen: true, 		// Enable fullscreen
+								maxscale: 3 			// Setting maxscale to 3 times bigger than the original file
+							});
+						});
+					</script>
+
+		<script src="js/raphael.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
+	<script> 
+	  
+		//document.getElementById("heatMap").style.backgroundImage = "url('images/store2.jpeg')";
+		var config = {
+			container: document.getElementById('heatMap'),
+			radius: 17,
+			maxOpacity: 1,
+	  minOpacity: 0,
+	  blur: .5,
+	  
+		};
+	  var heatmapInstance = h337.create(config);
+
+	  var testData = {
+			min: 0,
+			max: 5,
+			data: [{x: 500, y: 430, value: 1}, {x: 501, y: 431, value: 1}, {x: 502, y: 432, value: 1}, {x: 503, y: 433, value: 1}, {x: 504, y: 434, value: 1}, {x: 505, y: 435, value: 1}, {x: 506, y: 436, value: 1}]
+	  };
+	  heatmapInstance.setData(testData);
+		
+		for (i=0;i<5;i++){
+		var dataPoints = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+		
+		function getRandomIndex (low, high) {
+		return Math.floor(Math.random() * (high - low + 1) + low);
+	}
+		var getrandomDensity = [dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)]]
+		
+		heatmapInstance.addData(getrandomDensity);
+			
+		} 
+		
+			
+			
+	</script>
+
+
+	</body>
+
+
+	</html>
