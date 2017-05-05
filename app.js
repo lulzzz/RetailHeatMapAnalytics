@@ -30,9 +30,11 @@ app.use(bodyParser.urlencoded({
 var html_dir = './views/';
 app.use('/',index);
 app.get('/past', function(req, res){
-  res.sendFile(html_dir +'past.html');
+  res.sendFile(html_dir +'past_analytics.html');
 });
-
+app.get('/modal', function(req, res){
+  res.sendFile(html_dir +'modal.html');
+});
 app.post('/getheatmapdaily',heatmap.getdaily);
 app.post('/getheatmaphourly',heatmap.gethourly);
 app.post('/getheatmapmonthly',heatmap.getmonthly);
