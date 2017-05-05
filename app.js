@@ -35,7 +35,37 @@ app.get('/past', function(req, res){
 app.get('/modal', function(req, res){
   res.sendFile(html_dir +'modal.html');
 });
-app.post('/getheatmapdaily',heatmap.getdaily);
+
+app.post('/getheatmapdaily', function(req, res){
+  heatmap.getdaily
+});
+
+app.post('/getheatmaphourly', function(req, res){
+  heatmap.gethourly
+});
+
+app.post('/getheatmapmonthly', function(req, res){
+  heatmap.getmonthly
+});
+
+app.post('/getheatmapyearly', function(req, res){
+  heatmap.getyearly
+});
+
+app.post('/heatmapdaily', function(req, res){
+  heatmap.postdaily
+});
+
+app.post('/getanalyticsdaily', function(req, res){
+  analytics.getdaily
+});
+
+app.post('/analyticsdaily', function(req, res){
+  analytics.postdaily
+});
+
+
+/*app.post('/getheatmapdaily',heatmap.getdaily);
 app.post('/getheatmaphourly',heatmap.gethourly);
 app.post('/getheatmapmonthly',heatmap.getmonthly);
 app.post('/getheatmapyearly',heatmap.getyearly);
@@ -43,7 +73,7 @@ app.post('/heatmapdaily',heatmap.postdaily);
 
 app.post('/getanalyticsdaily',analytics.getdaily);
 app.post('/analyticsdaily',analytics.postdaily);
-
+*/
 
 
 app.listen(port, function(){
