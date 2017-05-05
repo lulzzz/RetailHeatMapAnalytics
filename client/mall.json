@@ -75,6 +75,7 @@
 				"description": "Expect more.Pay less",
 				"category": "dep",
 				"thumbnail": "images/thumbs/target.jpg",
+				"storeId":"targetStoreID",
 				"link": "http://codecanyon.net/user/sekler?ref=sekler",
 				"x": "0.6651",
 				"y": "0.6734",
@@ -86,6 +87,8 @@
 					"description": "Walmart <i>department</i> store",
 					"category": "dep",
 					"thumbnail": "images/thumbs/walmart.jpg",
+					"storeId":"walmartStoreID",
+					"link": "http://codecanyon.net/user/sekler?ref=sekler",
 					"x": "0.2021",
 					"y": "0.5847",
 					"zoom": "2"
@@ -97,6 +100,7 @@
 					"description": "<p>Recognizing the need is the primary condition for design.</p>",
 					"category": "dep",
 					"thumbnail": "images/thumbs/costco.jpg",
+					"storeId":"costcoStoreID",
 					"x": "0.7935",
 					"y": "0.2736",
 					"zoom": "3"

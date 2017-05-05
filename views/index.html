@@ -32,50 +32,71 @@
   	<link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
   	<link rel="stylesheet" type="text/css" href="css/map.css">
 
-    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script>
-      var ang= angular.module("prod",[]);
-      ang.controller("ProdController", function($scope,$http){
-      $scope.products =  [
-      {category:'Garments',name:'Jeans',quantity:5},
-      {category:'Garments',name:'Shirts',quantity:10},
-      {category:'Grocery',name:'Rice',quantity:"100 Kg"},
-      {category:'Grocery',name:'Bread',quantity:"100 packets"}
-      ];
+     <script src='https://www.patrick-wied.at/static/heatmapjs/assets/js/heatmap.min.js'></script>
 
-      });
-    </script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
     <!-- Modernizr JS -->
   	<script src="js/modernizr-2.6.2.min.js"></script>
   	<!-- FOR IE9 below -->
   	<!--[if lt IE 9]>
   	<script src="js/respond.min.js"></script>
   	<![endif]-->
+    <style>
+
+		#target{
+
+		background: no-repeat;
+		width: 100%;
+		height: 100%
+
+	}
+	#costco{
+
+		background: no-repeat;
+		width: 100%;
+		height: 100%
+
+	}
+		#walmart{
+
+		background: no-repeat;
+		width: 100%;
+		height: 100%
+
+	}
+
+
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+	  #targetMap{
+      width: 100%;
+    }
+	  path{stroke:none!important;}
+	  circle{fill: red!important;
+	  stroke: blue!important;}
+    </style>
 
 </head>
 
-<body>
+<body ng-app="prod" ng-controller="ProdController">
 
-    <div id="wrapper">
+    <div id="wrapper" >
 
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.html">Retail Heat Map Analytics</a>
-            </div>
+          <h3 align="center">Retail Heat Map Analytics</h3>
+
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 
                         <li>
-                            <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
                         </li>
 
                         <li>
@@ -86,7 +107,7 @@
                                     <a href="#">Costco <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Store Page</a>
+                                            <a ng-click="costcoStore()">Store Page</a>
                                         </li>
                                         <li>
                                             <a href="#">HeatMap</a>
@@ -102,7 +123,7 @@
                                     <a href="#">Target <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Store Page</a>
+                                            <a ng-click="targetStore()">Store Page</a>
                                         </li>
                                         <li>
                                             <a href="#">HeatMap</a>
@@ -114,27 +135,12 @@
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
-                                <li>
-                                    <a href="#">Bargain <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a href="#">Store Page</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">HeatMap</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Recommendation</a>
-                                        </li>
 
-                                    </ul>
-                                    <!-- /.nav-third-level -->
-                                </li>
                                 <li>
                                     <a href="#">Walmart <span class="fa arrow"></span></a>
                                     <ul class="nav nav-third-level">
                                         <li>
-                                            <a href="#">Store Page</a>
+                                            <a ng-click="walmartStore()">Store Page</a>
                                         </li>
                                         <li>
                                             <a href="#">HeatMap</a>
@@ -168,11 +174,21 @@
             <!-- /.navbar-static-side -->
         </nav>
 
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="/">Home</a></li>
+  <li role="presentation"><a href="/past">Past Analytics</a></li>
+
+</ul>
+
+        </nav>
+
         <div id="page-wrapper">
-            <div class="row">
+
                 <div class="col-lg-12">
                     <h1 class="page-header">Spartan Store</h1>
-                </div>
+
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
@@ -209,94 +225,244 @@
                     </div>
                     <!-- /.panel -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Bar Chart Example
-                            <div class="pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        Actions
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Action</a>
-                                        </li>
-                                        <li><a href="#">Another action</a>
-                                        </li>
-                                        <li><a href="#">Something else here</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Separated link</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+
                         <!-- /.panel-heading -->
-                        <div class="panel-body">
+                        <div class="panel-body" >
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Date</th>
-                                                    <th>Time</th>
-                                                    <th>Amount</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>3326</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:29 PM</td>
-                                                    <td>$321.33</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3325</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:20 PM</td>
-                                                    <td>$234.34</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3324</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:03 PM</td>
-                                                    <td>$724.17</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3323</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>3:00 PM</td>
-                                                    <td>$23.71</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3322</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:49 PM</td>
-                                                    <td>$8345.23</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3321</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:23 PM</td>
-                                                    <td>$245.12</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3320</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:15 PM</td>
-                                                    <td>$5663.54</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3319</td>
-                                                    <td>10/21/2013</td>
-                                                    <td>2:13 PM</td>
-                                                    <td>$943.45</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="col-lg-12" id= "targetStoreMap" ng-show="targetStoreMap">
+                                  <div class="panel-heading">
+
+                                        <ul class="nav nav-tabs">
+                                        <li role="presentation" class="active"><a data-toggle="tab" href="#target_store">Store</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#target_heatmap">HeatMap</a></li>
+                                        <li role="presentation"><a href="#">Messages</a></li>
+                                        </ul>
+
+									  <div class="tab-content">
+
+									   <div id="target_store" class="tab-pane fade">
+										  <h3 align="center"> Welcome to Target</h3>
+                                  <img src="images/store/12.jpg">
+
+
+										  </div> <!--END target_store-->
+
+
+
+										  <div id="target_heatmap" class="tab-pane fade">
+										  <h3 align="center">Current HeatMap</h3>
+
+										  <div id='target' class="col-lg-12">
+                  <img src="images/store3.jpeg" onload="targetHeatmap()">
+								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
+								</div> <!--END target-->
+									   <script>
+    // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
+
+	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
+								function targetHeatmap(){
+
+	var config3 = {
+		container: document.getElementById('target'),
+		radius: 17,
+		maxOpacity: 1,
+  minOpacity: 0,
+  blur: .5,
+
+	};
+  var heatmapInstance = h337.create(config3);
+
+  var testData3 = {
+        min: 0,
+        max: 3,
+        data: [{x: 120, y: 110, value: 1}, {x: 121, y: 111, value: 1}, {x: 122, y: 100, value: 1}, {x: 132, y: 200, value: 1}, {x: 160, y: 94, value: 1}, {x: 119, y: 201, value: 1}, {x: 142, y: 168, value: 1}]
+  };
+  heatmapInstance.setData(testData3);
+
+	for (i=0;i<5;i++){
+	var dataPoints3 = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+
+	function getRandomIndex (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+	var getrandomDensity = [dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)]]
+
+	heatmapInstance.addData(getrandomDensity);
+
+	}
+
+								}
+
+</script>
+
+
+
+
+										  </div> <!--END target_heatmap-->
+
+									  </div>  <!--END tab-content-->
+
+
+
+
+                                  </div>
+
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <div class="col-lg-12" id= "walmartStoreMap" ng-show="walmartStoreMap">
+                                  <div class="panel-heading">
+
+
+                                        <ul class="nav nav-tabs">
+                                        <li role="presentation" class="active"><a data-toggle="tab" href="#walmart_store">Store</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#walmart_heatmap">HeatMap</a></li>
+                                        <li role="presentation"><a href="#">Messages</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+
+									   <div id="walmart_store" class="tab-pane fade">
+										  <h3 align="center"> Welcome to Walmart</h3>
+                                  <img src="images/store/3.jpg">
+
+
+										  </div> <!--END walmart_store-->
+
+
+
+										  <div id="walmart_heatmap" class="tab-pane fade">
+										  <h3 align="center">Current HeatMap</h3>
+
+										  <div id='walmart' class="col-lg-12">
+                  <img src="images/store2.jpeg" onload="walmartHeatmap()">
+								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
+								</div> <!--END target-->
+									   <script>
+    // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
+
+	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
+								function walmartHeatmap(){
+
+	var config3 = {
+		container: document.getElementById('walmart'),
+		radius: 17,
+		maxOpacity: 1,
+  minOpacity: 0,
+  blur: .5,
+
+	};
+  var heatmapInstance = h337.create(config3);
+
+  var testData3 = {
+        min: 0,
+        max: 3,
+        data: [{x: 120, y: 110, value: 1}, {x: 121, y: 111, value: 1}, {x: 122, y: 100, value: 1}, {x: 132, y: 200, value: 1}, {x: 160, y: 94, value: 1}, {x: 119, y: 201, value: 1}, {x: 142, y: 168, value: 1}]
+  };
+  heatmapInstance.setData(testData3);
+
+	for (i=0;i<5;i++){
+	var dataPoints3 = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+
+	function getRandomIndex (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+	var getrandomDensity = [dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)]]
+
+	heatmapInstance.addData(getrandomDensity);
+
+	}
+
+								}
+
+</script>
+
+
+
+
+										  </div> <!--END target_heatmap-->
+
+									  </div>  <!--END tab-content-->
+
+                                  </div>
+
+                                    <!-- /.table-responsive -->
+                                </div>
+                                <div class="col-lg-12" id= "costcoStoreMap" ng-show="costcoStoreMap">
+                                  <div class="panel-heading">
+
+
+                                        <ul class="nav nav-tabs">
+                                        <li role="presentation" class="active"><a a data-toggle="tab" href="#costco_store">Store</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#costco_heatmap">HeatMap</a></li>
+                                        <li role="presentation"><a href="#">Messages</a></li>
+                                        </ul>
+
+                                          <div class="tab-content">
+
+									   <div id="costco_store" class="tab-pane fade">
+										  <h3 align="center"> Welcome to Costco</h3>
+                                  <img src="images/store/1.jpg">
+
+
+										  </div> <!--END target_store-->
+
+
+
+										  <div id="costco_heatmap" class="tab-pane fade">
+										  <h3 align="center">Current HeatMap</h3>
+
+										  <div id='costco' class="col-lg-12">
+                                    <img src="images/store1.jpeg" onload="costcoHeatmap()">
+								<canvas  id ="myCanvas3"  style=" width: 100%s; height: 100%; position:absolute"></canvas>
+								</div> <!--END target-->
+									   <script>
+    // document.getElementById("heatMap").style.backgroundSize = " 699px 661px";
+
+	//document.getElementById("heatMap").style.backgroundImage = "url('store1.jpeg')";
+								function costcoHeatmap(){
+
+	var config3 = {
+		container: document.getElementById('costco'),
+		radius: 17,
+		maxOpacity: 1,
+  minOpacity: 0,
+  blur: .5,
+
+	};
+  var heatmapInstance = h337.create(config3);
+
+  var testData3 = {
+        min: 0,
+        max: 3,
+        data: [{x: 120, y: 110, value: 1}, {x: 121, y: 111, value: 1}, {x: 122, y: 100, value: 1}, {x: 132, y: 200, value: 1}, {x: 160, y: 94, value: 1}, {x: 119, y: 201, value: 1}, {x: 142, y: 168, value: 1}]
+  };
+  heatmapInstance.setData(testData3);
+
+	for (i=0;i<5;i++){
+	var dataPoints3 = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+
+	function getRandomIndex (low, high) {
+    return Math.floor(Math.random() * (high - low + 1) + low);
+}
+	var getrandomDensity = [dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)],dataPoints3[getRandomIndex(0,13)]]
+
+	heatmapInstance.addData(getrandomDensity);
+
+	}
+
+								}
+
+</script>
+
+
+
+
+										  </div> <!--END target_heatmap-->
+
+									  </div>  <!--END tab-content-->
+
+                                  </div>
+
                                     <!-- /.table-responsive -->
                                 </div>
                                 <!-- /.col-lg-4 (nested) -->
@@ -321,7 +487,7 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                          <div class="panel-body"  ng-app="prod" ng-controller="ProdController">
+                          <div class="panel-body"   >
                             <div class="list-group">
                         <ul>
                         <p ng-repeat="x in products">
@@ -341,18 +507,7 @@
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                        </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                            <a href="#" class="btn btn-default btn-block">View Details</a>
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
-
+                    
 
                         <!-- /.panel-footer -->
                     </div>
@@ -373,6 +528,7 @@
     <script src="js/jquery.easing.1.3.js"></script>
     <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
+        <script src="js/controller.js"></script>
     <!-- Waypoints -->
     <script src="js/jquery.waypoints.min.js"></script>
     <!-- Stellar Parallax -->
@@ -417,6 +573,85 @@
     				});
     			</script>
 
+    <script src="js/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
+
+    <script>
+	//http://zreference.com/raphael-animation-along-a-path/
+      /*$(function(){
+           Raphael.fn.addGuides = function() {
+              this.ca.guide = function(g) {
+                return {
+                  guide: g
+                };
+              };
+              this.ca.along = function(percent) {
+                var g = this.attr("guide");
+                var len = g.getTotalLength();
+                var point = g.getPointAtLength(percent * len);
+                var t = {
+                  transform: "t" + point.x + " " + point.y
+                };
+                return t;
+              };
+            };
+
+            function getRandomInt(min, max) {
+              return Math.floor(Math.random() * (max - min + 1)) + min;
+          }
+                  var p = new Raphael(0,0,"100%","100%");
+
+                  // give raphael guide and along custom attributes
+                  p.addGuides();
+
+                  var white = {stroke : "white"};
+          		      var blue = {stroke : "blue!important"};
+                  var path;
+
+                var path1 = p.path("M 100 230 L 110 550  L 230 580 L 600 580 L 600 230 L 900 230 L 900 450 L 580 450 L 580 250 z").attr(white);
+          	  var path2 = p.path("M 50 200 L 50 380 L 200 520 L 350 380 L 350 230 L 600 230 z").attr(white);
+
+                var path3 = p.path("M 300 260 L 900 260 L 900 70 L 1100 70 L 900 120 L 900 260 z").attr(white);
+                var path4 = p.path("M 300 240 L 900 240 L 900 470 L 760 460 L 760 240 L 400 240 z").attr(white);
+
+           // var path3 = p.path("M 70 30 Q 50 350  L 70 600 L 530 600 L 530 30 z").attr(blue);
+          	//  var path4 =  p.path("M 20 60 Q 20 350  L 20 310 L 530 320 L 530 60 z").attr(blue);
+          	  	//  var path5 =  p.path("M 50 30 Q 50 350  L 50 310 L 530 320 L 530 310 L 590 30 z").attr(blue);
+                //  var path2 = p.path("M 300 100 Q 350 350 400 10 50 60 100 600 100 50 100").attr(white);
+                      var _people = 12;
+          		var _heads = 0;
+          		for(var i=1;i<=_people;i++){
+          	var path;
+          	if(i%4==0)path = path1;
+          	if(i%4==1)path = path2;
+          	if(i%4==2)path = path3;
+          	if(i%4==3)path = path4;
+
+          		// var path = (i%2==0)?path1: path2;
+          p.circle(0, 0, 10).attr(white).attr({guide : path, along : 0})
+                      .animate({along : 1}, getRandomInt(20000, 400000), "ease-out");
+          		}
+
+
+                  $(document).on("click", function(){
+                    // animate along a path
+
+
+          	$.each(_heads, function( i, val ) {
+          	var path = (i%2==0)?path1: path2;
+          	console.log($(this));
+            $(this).attr({guide : path1, along : 0})
+                      .animate({along : 1}, 300000, "ease-out");
+
+          });
+                  });
+
+                });*/
+
+              </script>
+
+
 </body>
+
 
 </html>
