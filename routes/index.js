@@ -6,7 +6,9 @@ router.get('/',function(req, res, next){
 });
 
 router.get('/past',function(req, res, next){
-  res.render('past.html');
+  res.render('past_analytics.html');
 });
-
+router.get('/modal',function(req, res, next){
+  res.render('modal.html');
+});
 module.exports = router;
