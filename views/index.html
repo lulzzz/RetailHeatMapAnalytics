@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -100,7 +98,7 @@ top:0px;!important;}
 	  path{stroke:none!important;}
 	  circle{fill: red!important;
 	  stroke: blue!important;}
-	  
+
 	  #disply_st1{
 	     background-image: url(images/store/12.jpg);
     display: block;
@@ -108,7 +106,7 @@ top:0px;!important;}
     width: 100%;
 	background-repeat: no-repeat;
 }
-	  
+
 	  #disply_st2{
 	     background-image: url(images/store/3.jpg);
     display: block;
@@ -116,7 +114,7 @@ top:0px;!important;}
     width: 100%;
 	background-repeat: no-repeat;
 }
-	  
+
 	  #disply_st3{
 	     background-image: url(images/store/1.jpg);
     display: block;
@@ -159,9 +157,11 @@ top:0px;!important;}
                                             <a href="#">HeatMap</a>
                                         </li>
                                         <li>
-                                            <a href="#">Recommendation</a>
+                                            <a href="#">Product Catalog</a>
                                         </li>
-
+										<li>
+                                            <a href="#">Store 360 View</a>
+                                        </li>
                                     </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
@@ -175,10 +175,11 @@ top:0px;!important;}
                                             <a href="#">HeatMap</a>
                                         </li>
                                         <li>
-                                            <a href="#">Recommendation</a>
+                                            <a href="#">Product Catalog</a>
                                         </li>
-
-                                    </ul>
+										<li>
+                                            <a href="#">Store 360 View</a>
+                                        </li>                                    </ul>
                                     <!-- /.nav-third-level -->
                                 </li>
 
@@ -192,7 +193,10 @@ top:0px;!important;}
                                             <a href="#">HeatMap</a>
                                         </li>
                                         <li>
-                                            <a href="#">Recommendation</a>
+                                            <a href="#">Product Catalog</a>
+                                        </li>
+										<li>
+                                            <a href="#">Store 360 View</a>
                                         </li>
 
                                     </ul>
@@ -231,7 +235,7 @@ top:0px;!important;}
         </nav>
 
         <div id="page-wrapper">
-      
+
          <div class="row">
 		  <div class="col-lg-12">
                     <h1 class="page-header">Spartan Store</h1>
@@ -271,7 +275,7 @@ top:0px;!important;}
             					</div>
             				</section>
                     </div>
-              
+
 
                     <!-- /.panel -->
                 </div>
@@ -279,20 +283,14 @@ top:0px;!important;}
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-shopping-cart fa-fw"></i> Product Details
+                            <i class="fa fa-shopping-cart fa-fw"></i> Application Description
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                           <div class="panel-body"   >
                             <div class="list-group">
                         <ul>
-                        <p ng-repeat="x in products">
-                                <a href="#" class="list-group-item">
-                                 {{x.name}}
-                                    <span class="pull-right text-muted small"><em>{{x.quantity}}</em>
-                                    </span>
-                                </a>
-                          </p>
+                         <span>Provide description here</span>
                         </ul>
                             </div>
 
@@ -303,20 +301,20 @@ top:0px;!important;}
                         </div>
                         <!-- /.panel-body -->
                     </div>
-                    
+
 
                         <!-- /.panel-footer -->
                     </div>
                     <!-- /.panel .chat-panel -->
                 </div>
                 <!-- /.col-lg-4 -->
-            
-			
-			
-		
+
+
+
+
 
 			      <!-- /.panel -->
-               
+
                             <div class="row">
                                 <div class="col-lg-12" id= "targetStoreMap" ng-show="targetStoreMap">
                                   <div class="panel-heading">
@@ -324,25 +322,31 @@ top:0px;!important;}
                                         <ul class="nav nav-tabs">
                                         <li role="presentation" class="active"><a data-toggle="tab" href="#target_store">Store</a></li>
                                         <li role="presentation"><a data-toggle="tab" href="#target_heatmap">HeatMap</a></li>
-                                        <li role="presentation"><a href="#">Messages</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#target_productCatalog">Product Catalog</a></li>
+										<li role="presentation"><a data-toggle="tab" href="#target_store360view">360 degree view</a></li>
                                         </ul>
 
 									  <div class="tab-content">
-<h3 align="center"> Welcome to Target</h3>
-									   <div id="target_store" class="tab-pane fade">
-										  
-                                
-
-<div id="disply_st2"></div>
-										  </div> <!--END target_store-->
-
-
-
-										  <div id="target_heatmap" class="tab-pane fade">
-										  <h3 align="center">Current HeatMap</h3>
-
+                        <h3 align="center"> Welcome to Target</h3>
+									      <div id="target_store" class="tab-pane fade">
+                                <div id="disply_st2"></div>
+  										  </div> <!--END target_store-->
+     									  <div id="target_heatmap" class="tab-pane fade">
+			          							  <h3 align="center">Current HeatMap</h3>
 										  </div> <!--END target_heatmap-->
-
+                      <div id="target_productCatalog" class="tab-pane fade">
+                              <h3 align="center">Real Time Product Count Tracker</h3>
+                              <p ng-repeat="x in products">
+                                      <a class="list-group-item">
+                                       {{x.name}}
+                                          <span class="pull-right text-muted small"><em>{{x.quantity}}</em>
+                                          </span>
+                                      </a>
+                              </p>
+                      </div>
+					  <div id="target_store360view" class="tab-pane fade">
+			          							  <h3 align="center">360 Degree view</h3>
+					  </div> <!--END target_360 degree view-->
 									  </div>  <!--END tab-content-->
 
 
@@ -359,36 +363,30 @@ top:0px;!important;}
                                         <ul class="nav nav-tabs">
                                         <li role="presentation" class="active"><a data-toggle="tab" href="#walmart_store">Store</a></li>
                                         <li role="presentation"><a data-toggle="tab" href="#walmart_heatmap">HeatMap</a></li>
-                                        <li role="presentation"><a href="#">Messages</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#walmart_productCatalog">Product Catalog</a></li>
+										<li role="presentation"><a data-toggle="tab" href="#walmart_store360view">360 degree view</a></li>
                                         </ul>
 
                                         <div class="tab-content">
-
 										  <h3 align="center"> Welcome to Walmart</h3>
-                              
 
-
-																		   <div id="walmart_store" class="tab-pane fade">
-										  
-                                
-
-<div id="disply_st3"></div>
+										 <div id="walmart_store" class="tab-pane fade">
+										  <div id="disply_st3"></div>
 
 										  </div> <!--END target_store-->
 
-
-
 										  <div id="walmart_heatmap" class="tab-pane fade">
-										  <h3 align="center">Current HeatMap</h3>
-
-						
-
+												<h3 align="center">Current HeatMap</h3>
 
 										  </div> <!--END target_heatmap-->
+										  <div id="walmart_productCatalog" class="tab-pane fade">
+												<h3 align="center">Real Time Product Count Tracker</h3>
 
+										  </div>
+										  <div id="walmart_store360view" class="tab-pane fade">
+												<h3 align="center">360 Degree view</h3>
+										  </div>
 									  </div>  <!--END tab-content-->
-									
-
                                   </div>
 
                                     <!-- /.table-responsive -->
@@ -400,28 +398,29 @@ top:0px;!important;}
                                         <ul class="nav nav-tabs">
                                         <li role="presentation" class="active"><a a data-toggle="tab" href="#costco_store">Store</a></li>
                                         <li role="presentation"><a data-toggle="tab" href="#costco_heatmap">HeatMap</a></li>
-                                        <li role="presentation"><a href="#">Messages</a></li>
+                                        <li role="presentation"><a data-toggle="tab" href="#costco_productCatalog">Product Catalog</a></li>
+										<li role="presentation"><a data-toggle="tab" href="#costco_store360view">360 degree view</a></li>
+
                                         </ul>
 
                                           <div class="tab-content">
 
-									   
+
 										  <h3 align="center"> Welcome to Costco</h3>
-                                   <div id="costco_store" class="tab-pane fade">
-										  
-                                
-
-                                    <div id="disply_st1"></div>
-										  </div> <!--END target_store-->
-
-
-
-										  <div id="costco_heatmap" class="tab-pane fade">
-										  <h3 align="center">Current HeatMap</h3>
-			  </div> <!--END target_heatmap-->
-
+										<div id="costco_store" class="tab-pane fade">
+                                            <div id="disply_st1"></div>
+										</div> <!--END costco_store-->
+										<div id="costco_heatmap" class="tab-pane fade">
+										     <h3 align="center">Current HeatMap</h3>
+										 </div> <!--END costco_heatmap-->
+										<div id="costco_productCatalog" class="tab-pane fade">
+											 <h3 align="center">Real Time Product Count Tracker</h3>
+										</div>
+										<div id="costco_store360view" class="tab-pane fade">
+											 <h3 align="center">360 Degree view</h3>
+										</div>
 									  </div>  <!--END tab-content-->
- 
+
                                   </div>
 
                                     <!-- /.table-responsive -->
@@ -433,8 +432,8 @@ top:0px;!important;}
                                 <!-- /.col-lg-8 (nested) -->
                             </div>
                             <!-- /.row -->
-                 
-	
+
+
             <!-- /.row -->
         </div>
         <!-- /#page-wrapper -->
@@ -606,12 +605,12 @@ top:0px;!important;}
           		      var blue = {stroke : "blue!important"};
                   var path;
 
-              
- 
+
+
         var path1 = p.path("M 170 110 L 170 250  L 230 400 L 630 400 L 630 110 z").attr(white);
   var path2 = p.path("M 170 230 Q 170 250  L 170 470 L 590 490 L 640 490 L 640 70 L 140 70 L 140 290z").attr(white);
  var path3 = p.path("M 170 230 Q 170 250  L 170 270 L 590 290 L 590 290 L 570 70 L 140 70 L 140 290z").attr(white);
- 
+
 var path4 = p.path("M 170 230 Q 170 250  L 170 270 L 420 290 L 420 290 L 420 70 L 140 70 L 140 290z").attr(white);// var path3 = p.path("M 70 30 Q 50 350  L 70 600 L 530 600 L 530 30 z").attr(blue);
           	//  var path4 =  p.path("M 20 60 Q 20 350  L 20 310 L 530 320 L 530 60 z").attr(blue);
           	  	//  var path5 =  p.path("M 50 30 Q 50 350  L 50 310 L 530 320 L 530 310 L 590 30 z").attr(blue);
@@ -646,7 +645,7 @@ var path4 = p.path("M 170 230 Q 170 250  L 170 270 L 420 290 L 420 290 L 420 70 
 
                 });
 
-              </script> 
+              </script>
 			  <script>
 	//http://zreference.com/raphael-animation-along-a-path/
       $(function(){
@@ -681,13 +680,13 @@ var path4 = p.path("M 170 230 Q 170 250  L 170 270 L 420 290 L 420 290 L 420 70 
           		      var blue = {stroke : "blue!important"};
                   var path;
       var path;
- 
+
         var path1 = p.path("M 170 130 L 170 550  L 230 600 L 530 600 L 530 130 z").attr(white);
   var path2 = p.path("M 170 330 Q 170 450  L 170 520 L 530 520 L 530 330 z").attr(white);
   var path3 = p.path("M 50 30 Q 50 350  L 50 600 L 530 600 L 530 30 z").attr(blue);
 	 var path5 =  p.path("M 50 60 Q 50 350  L 50 310 L 530 320 L 530 60 z").attr(blue);
 	  	  var path4 =  p.path("M 50 30 Q 50 350  L 50 310 L 630 320 L 630 310 L 630 30 z").attr(blue);
-     
+
             var _people = 12;
 		var _heads = 0;
 		 var final_data;
@@ -698,7 +697,7 @@ var path4 = p.path("M 170 230 Q 170 250  L 170 270 L 420 290 L 420 290 L 420 70 
 	if(i%5==2)path = path3;
 	if(i%5==3)path = path4;
 		if(i%5==4)path = path5;
-           
+
           		// var path = (i%2==0)?path1: path2;
           p.circle(0, 0, 10).attr(white).attr({guide : path, along : 0})
                       .animate({along : 1}, getRandomInt(20000, 400000), "ease-out");
