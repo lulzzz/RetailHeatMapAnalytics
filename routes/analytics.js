@@ -31,7 +31,57 @@ exports.getsale=function(req,res){
 
 
 };
+exports.getProduct=function(req,res){
+
+    var store=req.param('storename');
+    var start = new Date(req.param('dated'));
+    var end = new Date(req.param('dated'));
+
+
+    start.setHours(0);
+    start.setMinutes(0);
+    end.setHours(23);
+    end.setMinutes(59);
+    var result=[["bags",12],["shirts",12],["jeans",12],["watches",16]];
+    res.status(200).send(result);
+
+
+    // mongo.connect(mongoURL, function(){
+    //     console.log('Connected to mongo at: ' + mongoURL);
+    //     var coll = mongo.collection('analyticsdaily');
+    //     coll.aggregate([ {$match:{"timestamp":{$gte: start, $lt: end},"store":store}},
+    //         {
+    //             $project: {
+    //                 _id:0,
+    //                 timestamp:1,
+    //                 bags: { $sum: "$sale" },
+    //                 shirts: { $sum: "$shirts" },
+    //                 jeans: { $sum: "$jeans" }
+    //
+    //             }
+    //         }
+    //     ]).toArray(function(err, result){
+    //         if(result)
+    //         {
+    //             console.log(result);
+    //             res.status(200).send({"result":result});
+    //         }
+    //         else
+    //         {
+    //             console.log(err);
+    //             res.status(401).send({"result":"Failed"});
+    //
+    //         }
+    //
+    //     });
+    //
+    // });
+
+
+
+};
 exports.getperson=function(req,res){
+
 
     var store=req.param('storename');
     var start = new Date(req.param('dated'));
@@ -65,6 +115,7 @@ exports.getperson=function(req,res){
             }
             else
             {
+                console.log(err);
                 res.status(401).send({"result":"Failed"});
 
             }
@@ -76,3 +127,4 @@ exports.getperson=function(req,res){
 
 
 };
+
