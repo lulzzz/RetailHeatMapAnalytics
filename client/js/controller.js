@@ -21,15 +21,49 @@ $scope.targetStore=function(){
   $scope.targetStoreMap=true;
   $scope.walmartStoreMap=false;
   $scope.costcoStoreMap=false;
-  
+
 
 }
 $scope.walmartStore=function(){
   $scope.targetStoreMap=false;
   $scope.walmartStoreMap=true;
   $scope.costcoStoreMap=false;
+  $scope.walmart_store=true;
 
 };
+$scope.walmartstore360view=function(){
+
+  console.log("In function");
+  $scope.walmart_store=false;
+  $scope.walmart_store360view=true;
+  $scope.walmart_heatmap=false
+  $scope.walmart_productCatalog=false;
+
+}
+  $scope.walmartstore=function(){
+
+    console.log("In function");
+    $scope.walmart_store=true;
+    $scope.walmart_store360view=false;
+    $scope.walmart_heatmap=false
+    $scope.walmart_productCatalog=false;
+  }
+  $scope.walmartheatmap=function(){
+
+    console.log("In function");
+    $scope.walmart_store=false;
+    $scope.walmart_store360view=false;
+    $scope.walmart_heatmap=true;
+    $scope.walmart_productCatalog=false;
+  }
+  $scope.walmartproductCatalog=function(){
+
+    console.log("In function");
+    $scope.walmart_store=false;
+    $scope.walmart_store360view=false;
+    $scope.walmart_heatmap=false;
+    $scope.walmart_productCatalog=true;
+  }
 $scope.costcoStore=function(){
   $scope.targetStoreMap=false;
   $scope.walmartStoreMap=false;
@@ -46,17 +80,17 @@ $scope.products =  [
 
 ang.directive('modal', function () {
     return {
-      template: '<div class="modal fade">' + 
-          '<div class="modal-dialog">' + 
-            '<div class="modal-content">' + 
-              '<div class="modal-header">' + 
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
-                '<h4 class="modal-title">{{ title }}</h4>' + 
-              '</div>' + 
-              '<div class="modal-body" ng-transclude></div>' + 
-			  
-            '</div>' + 
-          '</div>' + 
+      template: '<div class="modal fade">' +
+          '<div class="modal-dialog">' +
+            '<div class="modal-content">' +
+              '<div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h4 class="modal-title">{{ title }}</h4>' +
+              '</div>' +
+              '<div class="modal-body" ng-transclude></div>' +
+
+            '</div>' +
+          '</div>' +
         '</div>',
       restrict: 'E',
       transclude: true,
