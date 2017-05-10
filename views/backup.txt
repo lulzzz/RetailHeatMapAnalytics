@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Application which provides retail owners a means to analyze crowd density" />
+    <meta name="keywords" content="retail, heatmap, crowd, density, beahvior" />
+    <meta name="author" content="Shruthi Kulai, Taruna Arora, Mukul Bajpai, Ravali Peddi, Jagmohan Singh" />
+
+    <title>Retail Heat Map Analytics</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!--styles for directory map -->
+    <link rel="stylesheet" type="text/css" href="css/mapstyle.css">
+    <link rel="stylesheet" type="text/css" href="mapplic/mapplic.css">
+    <link rel="stylesheet" type="text/css" href="css/map.css">
+
+    <script src='js/heatmap.min.js'></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+
+    <!-- Modernizr JS -->
+    <script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+  	<script src="js/respond.min.js"></script>
+  	<![endif]-->
+    <style>
+        #target {
+            background: no-repeat;
+            width: 100%;
+            height: 100%
+        }
+        #costco {
+            background: no-repeat;
+            width: 100%;
+            height: 100%
+        }
+        #walmart {
+            background: no-repeat;
+            width: 100%;
+            height: 100%
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        #targetMap {
+            width: 100%;
+        }
+        path {
+            stroke: none!important;
+        }
+        circle {
+            fill: red!important;
+            stroke: blue!important;
+        }
+    </style>
+    <style>
+        .row {
+            display: block;
+        }
+        #disply_st1,
+        #disply_st2,
+        #disply_st3 {
+            display: block;
+            position: relative
+        }
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        #target_store svg {
+            overflow: hidden;
+            position: absolute !important;
+            left: 0px!important;
+            right;
+            top: 0px;
+            !important;
+        }
+        #target_store {
+            width: 100%;
+            left: 0px!important;
+            top: 0px!important;
+            margin: 0px !important;
+            padding: 0px!important;
+        }
+        path {
+            stroke: none!important;
+        }
+        circle {
+            fill: red!important;
+            stroke: blue!important;
+        }
+        #disply_st1 {
+            background-image: url(images/store/12.jpg);
+            display: block;
+            height: 603px;
+            width: 100%;
+            background-repeat: no-repeat;
+        }
+        #disply_st2 {
+            background-image: url(images/store/3.jpg);
+            display: block;
+            height: 603px;
+            width: 100%;
+            background-repeat: no-repeat;
+        }
+        #disply_st3 {
+            background-image: url(images/store/1.jpg);
+            display: block;
+            height: 603px;
+            width: 100%;
+            background-repeat: no-repeat;
+        }
+        .past_map {
+            width: 1269px;
+            height: 650px;
+            display: block;
+        }
+        .heatMap {
+            background: no-repeat;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+		.fade{display:none;}
+    </style>
+</head>
+
+<body ng-app="prod" ng-controller="ProdController">
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <h3 align="center">Retail Heat Map Analytics</h3>
+
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+
+                        <li>
+                            <a href="/"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-sitemap fa-fw"></i> Our Stores<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="#" >Costco <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a ng-click="costcoStore()">Store Page</a>
+                                        </li>
+                                        <li>
+                                            <a ng-click="">HeatMap</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Recommendation</a>
+                                        </li>
+
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#">Target <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a ng-click="targetStore()">Store Page</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">HeatMap</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Recommendation</a>
+                                        </li>
+
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+
+                                <li>
+                                    <a href="#">Walmart <span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level">
+                                        <li>
+                                            <a ng-click="walmartStore()">Store Page</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">HeatMap</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Recommendation</a>
+                                        </li>
+
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> About Us</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Feedback</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <ul class="nav nav-pills">
+                    <li role="presentation" class="active"><a href="/">Home</a>
+                    </li>
+                    <li role="presentation"><a href="/past">Past Analytics</a>
+                    </li>
+
+                </ul>
+
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Spartan Store</h1>
+
+                    <!-- /.col-lg-12 -->
+                </div>
+            </div>
+            <!-- /.row -->
+
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <section id="map-section" class="inner over">
+                            <div class="editor-window">
+                                <div class="window-mockup brown"></div>
+                                <div class="editor-body">
+                                    <code>
+            								{<br>
+            								&nbsp;&nbsp;&nbsp;"id": "newlandmark",<br>
+            								&nbsp;&nbsp;&nbsp;"title": "New Landmark",<br>
+            								&nbsp;&nbsp;&nbsp;"description": "Creating a new landmark is that easy!",<br>
+            								&nbsp;&nbsp;&nbsp;"x": "<span class="mapplic-coordinates-x">0.0000</span>",<br>
+            								&nbsp;&nbsp;&nbsp;"y": "<span class="mapplic-coordinates-y">0.0000</span>",<br>
+            								&nbsp;&nbsp;&nbsp;...<br>
+            								}
+            							</code>
+                                </div>
+                            </div>
+
+                            <div class="map-container">
+                                <div class="window-mockup">
+                                    <div class="window-bar"></div>
+                                </div>
+                                <!-- Map -->
+                                <div id="mapplic"></div>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-8 -->
+                <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-shopping-cart fa-fw"></i> Product Details
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <ul>
+                                        <p ng-repeat="x in products">
+                                            <a href="#" class="list-group-item">
+                                 {{x.name}}
+                                    <span class="pull-right text-muted small"><em>{{x.quantity}}</em>
+                                    </span>
+                                </a>
+                                        </p>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <!-- /.list-group -->
+                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+
+
+                    <!-- /.panel-footer -->
+                </div>
+                <!-- /.panel .chat-panel -->
+            </div>
+            <!-- /.col-lg-4 -->
+
+
+
+
+
+            <!-- /.panel -->
+
+            <div class="row">
+                <div class="col-lg-12" id="costcoStoreMap" ng-show="costcoStoreMap">
+                    <div class="panel-heading">
+
+
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a a data-toggle="tab" id="costcoM" ng-click="costcoStore()">Store</a>
+                            </li>
+                            <li role="presentation"><a data-toggle="tab" href="#costco_heatmap" class="heatm" id="costcoH">HeatMap</a>
+                            </li>
+                            <li role="presentation"><a href="#">Messages</a>
+                            </li>
+                        </ul>
+
+                        <div >
+
+
+                            <h3 align="center"> Welcome to Costco</h3>
+                            <div id="costco_store" class="tab-pane fade">
+
+
+
+                                <div id="disply_st1"></div>
+                            </div>
+                            <!--END target_store-->
+
+
+
+                            <div id="costco_heatmap" class="tab-pane fade">
+                                <h3 align="center">Current HeatMap</h3>
+                                <div class="past_map">
+                                    <div class="heatMap costco" id="cheatMap">
+                                        <canvas id="myCanvas" style=" width: 100%; height: 100%; position:absolute"></canvas>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <!--END target_heatmap-->
+
+                        </div>
+                        <!--END tab-content-->
+
+                    </div>
+
+                    <!-- /.table-responsive -->
+                </div>
+                <div class="col-lg-12" id="targetStoreMap" ng-show="targetStoreMap">
+                    <div class="panel-heading">
+
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a data-toggle="tab" href="" ng-click="targetStore()">Store</a>
+                            </li>
+                            <li role="presentation"><a data-toggle="tab" class="heatm" href="#target_heatmap">HeatMap</a>
+                            </li>
+                            <li role="presentation"><a href="#">Messages</a>
+                            </li>
+                        </ul>
+
+                        <div>
+                            <h3 align="center"> Welcome to Target</h3>
+                            <div id="target_store" class="tab-pane fade">
+
+
+
+                                <div id="disply_st2"></div>
+                            </div>
+                            <!--END target_store-->
+
+
+
+                            <div id="target_heatmap" class="tab-pane fade">
+                                <h3 align="center">Current HeatMap</h3>
+                             <h3 align="center">Current HeatMap</h3>
+                                <div class="past_map">
+                                    <div class="heatMap target" id="theatMap">
+                                        <canvas id="myCanvas" style=" width: 100%; height: 100%; position:absolute"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--END target_heatmap-->
+
+                        </div>
+                        <!--END tab-content-->
+
+
+
+
+                    </div>
+
+                    <!-- /.table-responsive -->
+                </div>
+                <div class="col-lg-12" id="walmartStoreMap" ng-show="walmartStoreMap">
+                    <div class="panel-heading">
+
+
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a data-toggle="tab" href="#walmart_store" ng-click="walmartStore()">Store</a>
+                            </li>
+                            <li role="presentation"><a data-toggle="tab" class="heatm" href="#walmart_heatmap">HeatMap</a>
+                            </li>
+                            <li role="presentation"><a href="#">Messages</a>
+                            </li>
+                        </ul>
+
+                        <div>
+
+                            <h3 align="center"> Welcome to Walmart</h3>
+
+
+
+                            <div id="walmart_store" class="tab-pane fade">
+
+
+
+                                <div id="disply_st3"></div>
+
+                            </div>
+                            <!--END target_store-->
+
+
+
+                            <div id="walmart_heatmap" class="tab-pane fade">
+                                <h3 align="center">Current HeatMap</h3>
+
+ <h3 align="center">Current HeatMap</h3>
+                                <div class="past_map">
+                                    <div class="heatMap walmart" id="wheatMap">
+                                        <canvas id="myCanvas" style=" width: 100%; height: 100%; position:absolute"></canvas>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <!--END target_heatmap-->
+
+                        </div>
+                        <!--END tab-content-->
+
+
+                    </div>
+
+                    <!-- /.table-responsive -->
+                </div>
+
+                <!-- /.col-lg-4 (nested) -->
+                <div class="col-lg-8">
+                    <div id="morris-bar-chart"></div>
+                </div>
+                <!-- /.col-lg-8 (nested) -->
+            </div>
+            <!-- /.row -->
+
+
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+    </div>
+    <!-- jQuery -->
+    <script src="js/jquery.min.js"></script>
+    <!-- jQuery Easing -->
+    <script src="js/jquery.easing.1.3.js"></script>
+    <!-- Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/controller.js"></script>
+    <!-- Waypoints -->
+    <script src="js/jquery.waypoints.min.js"></script>
+    <!-- Stellar Parallax -->
+    <script src="js/jquery.stellar.min.js"></script>
+    <!-- Counters -->
+    <script src="js/jquery.countTo.js"></script>
+    <!-- Main JS (Do not remove) -->
+    <script src="js/main.js"></script>
+
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+    <!-- Morris Charts JavaScript
+    <script src="../vendor/raphael/raphael.min.js"></script>
+   <script src="../vendor/morrisjs/morris.min.js"></script>
+    <script src="../data/morris-data.js"></script>-->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/sb-admin-2.js"></script>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="js/hammer.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="mapplic/mapplic.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var mapplic = $('#mapplic').mapplic({
+                source: 'mall.json', // Using mall.json file as map data
+                sidebar: true, // Enable sidebar
+                minimap: true, // Enable minimap
+                markers: false, // Disable markers
+                fillcolor: false, // Disable default fill color
+                fullscreen: true, // Enable fullscreen
+                maxscale: 3 // Setting maxscale to 3 times bigger than the original file
+            });
+        });
+    </script>
+
+    <script src="js/raphael.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
+    <script>
+        document.getElementById("cheatMap").style.backgroundImage = "url('images/store3.jpeg')";
+		document.getElementById("theatMap").style.backgroundImage = "url('images/store2.jpeg')";
+		 document.getElementById("wheatMap").style.backgroundImage = "url('images/store1.jpeg')";
+		  
+        $("#cheatMap").css({
+            'backgroundSize': '1280px 661px'
+        });
+        $("#costcoH").click(function(event) {
+
+			$(".tab-pane").addClass("fade");
+           $(".tab-pane").eq(1).removeClass("fade");
+            var config = {
+
+
+                container: document.getElementById('cheatMap'),
+                radius: 17,
+                maxOpacity: 1,
+                minOpacity: 0,
+                blur: .5,
+
+            };
+            var heatmapInstance = h337.create(config);
+
+            var testData = {
+                min: 0,
+                max: 5,
+                data: [{
+                    x: 500,
+                    y: 430,
+                    value: 1
+                }, {
+                    x: 501,
+                    y: 431,
+                    value: 1
+                }, {
+                    x: 502,
+                    y: 432,
+                    value: 1
+                }, {
+                    x: 503,
+                    y: 433,
+                    value: 1
+                }, {
+                    x: 504,
+                    y: 434,
+                    value: 1
+                }, {
+                    x: 505,
+                    y: 435,
+                    value: 1
+                }, {
+                    x: 506,
+                    y: 436,
+                    value: 1
+                }]
+            };
+            heatmapInstance.setData(testData);
+
+            for (i = 0; i < 5; i++) {
+                var dataPoints = [{
+                    x: 120,
+                    y: 505,
+                    value: 1
+                }, {
+                    x: 597,
+                    y: 285,
+                    value: 1
+                }, {
+                    x: 217,
+                    y: 449,
+                    value: 1
+                }, {
+                    x: 377,
+                    y: 656,
+                    value: 1
+                }, {
+                    x: 467,
+                    y: 509,
+                    value: 1
+                }, {
+                    x: 487,
+                    y: 164,
+                    value: 1
+                }, {
+                    x: 247,
+                    y: 194,
+                    value: 1
+                }, {
+                    x: 809,
+                    y: 584,
+                    value: 1
+                }, {
+                    x: 500,
+                    y: 250,
+                    value: 1
+                }, {
+                    x: 207,
+                    y: 430,
+                    value: 1
+                }, {
+                    x: 388,
+                    y: 565,
+                    value: 1
+                }, {
+                    x: 476,
+                    y: 519,
+                    value: 1
+                }, {
+                    x: 400,
+                    y: 264,
+                    value: 1
+                }, {
+                    x: 257,
+                    y: 231,
+                    value: 1
+                }]
+
+                function getRandomIndex(low, high) {
+                    return Math.floor(Math.random() * (high - low + 1) + low);
+                }
+                var getrandomDensity = [dataPoints[getRandomIndex(0, 13)], dataPoints[getRandomIndex(0, 13)], dataPoints[getRandomIndex(0, 13)]]
+
+                heatmapInstance.addData(getrandomDensity);
+
+            }
+
+
+        });
+    </script>
+    <script>
+        //http://zreference.com/raphael-animation-along-a-path/
+        $(function() {
+            Raphael.fn.addGuides = function() {
+                this.ca.guide = function(g) {
+                    return {
+                        guide: g
+                    };
+                };
+                this.ca.along = function(percent) {
+                    var g = this.attr("guide");
+                    var len = g.getTotalLength();
+                    var point = g.getPointAtLength(percent * len);
+                    var t = {
+                        transform: "t" + point.x + " " + point.y
+                    };
+                    return t;
+                };
+            };
+
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            var p = new Raphael(disply_st1, "100%", "100%");
+            //  var p = new Raphael(disply_st2,"100%","100%");
+            //  var p = new Raphael(disply_st3,"100%","100%");
+
+            // give raphael guide and along custom attributes
+            p.addGuides();
+
+            var white = {
+                stroke: "white"
+            };
+            var blue = {
+                stroke: "blue!important"
+            };
+            var path;
+
+            var path1 = p.path("M 100 230 L 110 550  L 230 580 L 600 580 L 600 230 L 900 230 L 900 450 L 580 450 L 580 250 z").attr(white);
+            var path2 = p.path("M 50 200 L 50 380 L 200 520 L 350 380 L 350 230 L 600 230 z").attr(white);
+
+            var path3 = p.path("M 300 260 L 900 260 L 900 70 L 1100 70 L 900 120 L 900 260 z").attr(white);
+            var path4 = p.path("M 300 240 L 900 240 L 900 470 L 760 460 L 760 240 L 400 240 z").attr(white);
+
+            // var path3 = p.path("M 70 30 Q 50 350  L 70 600 L 530 600 L 530 30 z").attr(blue);
+            //  var path4 =  p.path("M 20 60 Q 20 350  L 20 310 L 530 320 L 530 60 z").attr(blue);
+            //  var path5 =  p.path("M 50 30 Q 50 350  L 50 310 L 530 320 L 530 310 L 590 30 z").attr(blue);
+            //  var path2 = p.path("M 300 100 Q 350 350 400 10 50 60 100 600 100 50 100").attr(white);
+            var _people = 12;
+            var _heads = 0;
+            for (var i = 1; i <= _people; i++) {
+                var path;
+                if (i % 4 == 0) path = path1;
+                if (i % 4 == 1) path = path2;
+                if (i % 4 == 2) path = path3;
+                if (i % 4 == 3) path = path4;
+
+                // var path = (i%2==0)?path1: path2;
+                p.circle(0, 0, 10).attr(white).attr({
+                        guide: path,
+                        along: 0
+                    })
+                    .animate({
+                        along: 1
+                    }, getRandomInt(20000, 400000), "ease-out");
+            }
+
+
+            $(document).on("click", function() {
+                // animate along a path
+
+
+                $.each(_heads, function(i, val) {
+                    var path = (i % 2 == 0) ? path1 : path2;
+                    console.log($(this));
+                    $(this).attr({
+                            guide: path1,
+                            along: 0
+                        })
+                        .animate({
+                            along: 1
+                        }, 300000, "ease-out");
+
+                });
+            });
+
+        });
+    </script>
+
+    <script>
+        //http://zreference.com/raphael-animation-along-a-path/
+        $(function() {
+            Raphael.fn.addGuides = function() {
+                this.ca.guide = function(g) {
+                    return {
+                        guide: g
+                    };
+                };
+                this.ca.along = function(percent) {
+                    var g = this.attr("guide");
+                    var len = g.getTotalLength();
+                    var point = g.getPointAtLength(percent * len);
+                    var t = {
+                        transform: "t" + point.x + " " + point.y
+                    };
+                    return t;
+                };
+            };
+
+            function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                // var p = new Raphael(disply_st1,"100%","100%");
+            var p = new Raphael(disply_st2, "100%", "100%");
+            //  var p = new Raphael(disply_st3,"100%","100%");
+
+            // give raphael guide and along custom attributes
+            p.addGuides();
+
+            var white = {
+                stroke: "white"
+            };
+            var blue = {
+                stroke: "blue!important"
+            };
+            var path;
+
+
+
+            var path1 = p.path("M 170 110 L 170 250  L 230 400 L 630 400 L 630 110 z").attr(white);
+            var path2 = p.path("M 170 230 Q 170 250  L 170 470 L 590 490 L 640 490 L 640 70 L 140 70 L 140 290z").attr(white);
+            var path3 = p.path("M 170 230 Q 170 250  L 170 270 L 590 290 L 590 290 L 570 70 L 140 70 L 140 290z").attr(white);
+
+            var path4 = p.path("M 170 230 Q 170 250  L 170 270 L 420 290 L 420 290 L 420 70 L 140 70 L 140 290z").attr(white); // var path3 = p.path("M 70 30 Q 50 350  L 70 600 L 530 600 L 530 30 z").attr(blue);
+            //  var path4 =  p.path("M 20 60 Q 20 350  L 20 310 L 530 320 L 530 60 z").attr(blue);
+            //  var path5 =  p.path("M 50 30 Q 50 350  L 50 310 L 530 320 L 530 310 L 590 30 z").attr(blue);
+            //  var path2 = p.path("M 300 100 Q 350 350 400 10 50 60 100 600 100 50 100").attr(white);
+            var _people = 12;
+            var _heads = 0;
+            for (var i = 1; i <= _people; i++) {
+                var path;
+                if (i % 4 == 0) path = path1;
+                if (i % 4 == 1) path = path2;
+                if (i % 4 == 2) path = path3;
+                if (i % 4 == 3) path = path4;
+
+                // var path = (i%2==0)?path1: path2;
+                p.circle(0, 0, 10).attr(white).attr({
+                        guide: path,
+                        along: 0
+                    })
+                    .animate({
+                        along: 1
+                    }, getRandomInt(20000, 400000), "ease-out");
+            }
+
+
+            $(document).on("click", function() {
+                // animate along a path
+
+
+                $.each(_heads, function(i, val) {
+                    var path = (i % 2 == 0) ? path1 : path2;
+                    console.log($(this));
+                    $(this).attr({
+                            guide: path1,
+                            along: 0
+                        })
+                        .animate({
+                            along: 1
+                        }, 300000, "ease-out");
+
+                });
+            });
+
+        });
+    </script>
+    <script>
+        //http://zreference.com/raphael-animation-along-a-path/
+        $(function() {
+            Raphael.fn.addGuides = function() {
+                this.ca.guide = function(g) {
+                    return {
+                        guide: g
+                    };
+                };
+                this.ca.along = function(percent) {
+                    var g = this.attr("guide");
+                    var len = g.getTotalLength();
+                    var point = g.getPointAtLength(percent * len);
+                    var t = {
+                        transform: "t" + point.x + " " + point.y
+                    };
+                    return t;
+                };
+            };
+
+            function getRandomInt(min, max) {
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
+                }
+                // var p = new Raphael(disply_st1,"100%","100%");
+                //  var p = new Raphael(disply_st2,"100%","100%");
+            var p = new Raphael(disply_st3, "100%", "100%");
+
+            // give raphael guide and along custom attributes
+            p.addGuides();
+
+            var white = {
+                stroke: "white"
+            };
+            var blue = {
+                stroke: "blue!important"
+            };
+            var path;
+            var path;
+
+            var path1 = p.path("M 170 130 L 170 550  L 230 600 L 530 600 L 530 130 z").attr(white);
+            var path2 = p.path("M 170 330 Q 170 450  L 170 520 L 530 520 L 530 330 z").attr(white);
+            var path3 = p.path("M 50 30 Q 50 350  L 50 600 L 530 600 L 530 30 z").attr(blue);
+            var path5 = p.path("M 50 60 Q 50 350  L 50 310 L 530 320 L 530 60 z").attr(blue);
+            var path4 = p.path("M 50 30 Q 50 350  L 50 310 L 630 320 L 630 310 L 630 30 z").attr(blue);
+
+            var _people = 12;
+            var _heads = 0;
+            var final_data;
+            for (var i = 1; i <= _people; i++) {
+                var path;
+                if (i % 5 == 0) path = path1;
+                if (i % 5 == 1) path = path2;
+                if (i % 5 == 2) path = path3;
+                if (i % 5 == 3) path = path4;
+                if (i % 5 == 4) path = path5;
+
+                // var path = (i%2==0)?path1: path2;
+                p.circle(0, 0, 10).attr(white).attr({
+                        guide: path,
+                        along: 0
+                    })
+                    .animate({
+                        along: 1
+                    }, getRandomInt(20000, 400000), "ease-out");
+            }
+
+
+            $(document).on("click", function() {
+                // animate along a path
+
+
+                $.each(_heads, function(i, val) {
+                    var path = (i % 2 == 0) ? path1 : path2;
+                    console.log($(this));
+                    $(this).attr({
+                            guide: path1,
+                            along: 0
+                        })
+                        .animate({
+                            along: 1
+                        }, 300000, "ease-out");
+
+                });
+            });
+
+        });
+    </script>
+</body>
+
+
+</html>

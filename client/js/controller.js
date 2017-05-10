@@ -8,68 +8,51 @@ ang.controller("ProdController", function($scope,$http){
                 $scope.IsVisible = true;
 			//	alert("store"+store);
             }
+			      $scope.show = function (store) {
+                //If DIV is visible it will be hidden and vice versa.
+			$scope.backimage ={backgroundImage: "url('images/"+ store+"')" };
+                $scope.IsVisible = true;
+			//	alert("store"+store);
+            }
+			
     $scope.showModal = false;
     $scope.toggleModal = function(img,name){
 		//alert("",img);
         $scope.showModal = !$scope.showModal;
     };
-$scope.targetStoreMap=false;
-$scope.walmartStoreMap=false;
-$scope.costcoStoreMap=false;
 
-$scope.targetStore=function(){
-  $scope.targetStoreMap=true;
-  $scope.walmartStoreMap=false;
-  $scope.costcoStoreMap=false;
+$scope.costcoHeatMap = function(store){
+	  $scope.costcoStoreMap=true;
+	$scope.costcoMap=true;
+	$scope.bimage ={backgroundImage: "url('images/"+ store+"')" };
 
-
+	
 }
-$scope.walmartStore=function(){
-  $scope.targetStoreMap=false;
-  $scope.walmartStoreMap=true;
-  $scope.costcoStoreMap=false;
-  $scope.walmart_store=true;
 
-};
-$scope.walmartstore360view=function(){
-
-  console.log("In function");
-  $scope.walmart_store=false;
-  $scope.walmart_store360view=true;
-  $scope.walmart_heatmap=false
-  $scope.walmart_productCatalog=false;
-
+$scope.costcoStore = function(){
+	$scope.costcoStoreMap = true;
+	$scope.targetStoreMap = false;
+	$scope.walmartStoreMap = false;
+	$(".tab-pane").addClass("fade");
+	$("#costcoStoreMap .tab-pane").eq(0).removeClass("fade");
 }
-  $scope.walmartstore=function(){
 
-    console.log("In function");
-    $scope.walmart_store=true;
-    $scope.walmart_store360view=false;
-    $scope.walmart_heatmap=false
-    $scope.walmart_productCatalog=false;
-  }
-  $scope.walmartheatmap=function(){
-
-    console.log("In function");
-    $scope.walmart_store=false;
-    $scope.walmart_store360view=false;
-    $scope.walmart_heatmap=true;
-    $scope.walmart_productCatalog=false;
-  }
-  $scope.walmartproductCatalog=function(){
-
-    console.log("In function");
-    $scope.walmart_store=false;
-    $scope.walmart_store360view=false;
-    $scope.walmart_heatmap=false;
-    $scope.walmart_productCatalog=true;
-  }
-$scope.costcoStore=function(){
-  $scope.targetStoreMap=false;
-  $scope.walmartStoreMap=false;
-  $scope.costcoStoreMap=true;
-
+$scope.targetStore = function(){
+	$scope.targetStoreMap = true;
+	$scope.costcoStoreMap = false;
+	$scope.walmartStoreMap = false;
+	$(".tab-pane").addClass("fade");
+	$("#targetStoreMap .tab-pane").eq(0).removeClass("fade");
 }
+$scope.walmartStore = function(){
+	$scope.targetStoreMap = false;
+	$scope.costcoStoreMap = false;
+		$scope.walmartStoreMap = true;
+	$(".tab-pane").addClass("fade");
+	$("#walmartStoreMap .tab-pane").eq(0).removeClass("fade");
+}
+
+
 $scope.products =  [
 {category:'Garments',name:'Jeans',quantity:5},
 {category:'Garments',name:'Shirts',quantity:10},
@@ -80,17 +63,17 @@ $scope.products =  [
 
 ang.directive('modal', function () {
     return {
-      template: '<div class="modal fade">' +
-          '<div class="modal-dialog">' +
-            '<div class="modal-content">' +
-              '<div class="modal-header">' +
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-                '<h4 class="modal-title">{{ title }}</h4>' +
-              '</div>' +
-              '<div class="modal-body" ng-transclude></div>' +
-
-            '</div>' +
-          '</div>' +
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                '<h4 class="modal-title">{{ title }}</h4>' + 
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+			  
+            '</div>' + 
+          '</div>' + 
         '</div>',
       restrict: 'E',
       transclude: true,
@@ -120,3 +103,5 @@ ang.directive('modal', function () {
       }
     };
   });
+  
+  
