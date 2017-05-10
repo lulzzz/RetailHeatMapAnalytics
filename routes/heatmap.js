@@ -90,17 +90,8 @@ exports.gethourly=function(req,res){
 exports.getdaily=function(req,res){
 
     var store=req.param('storename');
-    var start = new Date(req.param('dated'));
-    var end = new Date(req.param('dated'));
-
-
-    start.setHours(0);
-    start.setMinutes(0);
-     end.setHours(23);
-    end.setMinutes(59);
-
-
-
+    var end = new Date(2017, 04, 30);
+    var start = new Date(2017, 04, 01);
 
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
@@ -132,9 +123,8 @@ exports.postdaily=function(req,res){
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('heatmapdaily');
-        coll.insertOne({"timestamp" : new Date(),
+        coll.insertOne({"timestamp" : new Date('2016-12-04T20:19:31.157Z'),
             "store" : store,
-
             "coord":coord
 
         }, function(err,data){

@@ -75,13 +75,15 @@
 		<!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<style>
+			
 
 			#target{
 
 			background: no-repeat;
 			width: 100%;
-			height: 100%
+			height: 100%;
 
 		}
 		.carousel-caption {top:320px !important;}
@@ -89,7 +91,7 @@
 
 			background: no-repeat;
 			width: 100%;
-			height: 100%
+			height: 100%;
 
 		}
 			#walmart{
@@ -102,10 +104,7 @@
 
 
 
-		img {
-		  max-width: 100%;
-		  max-height: 100%;
-		}
+		
 		  #targetMap{
 		  width: 100%;
 		}
@@ -114,11 +113,17 @@
 		  stroke: blue!important;}
 		</style>
 	  <style>
-		.row{display: block;}
-	#disply_st1,#disply_st2,#disply_st3 {display: block; position:relative}
+		.row{display: block;
+		 	  
+  margin-top: 30px;
+  margin-bottom: 50px;
+		  
+		  }
+	#disply_st1,#disply_st2,#disply_st3 {display: block; position:relative;}
 		img {
 		  max-width: 100%;
 		  max-height: 100%;
+			
 		}
 		 #target_store svg{overflow: hidden;
 		position: absolute !important;
@@ -135,9 +140,9 @@
 		overflow: hidden;}
 		</style>
 		<style>
-		
-		
-	.past_map{	
+
+
+	.past_map{
 		 width: 1269px;
 		height: 650px;
 		display: block;
@@ -147,10 +152,10 @@
 		display: block;
 		width: 100%;
 		height: 100%;}
-		
+
 		@import url('http://getbootstrap.com/dist/css/bootstrap.css');
 		</style>
-	
+
 	</head>
 
 	<body ng-app="prod" ng-controller="ProdController">
@@ -256,7 +261,7 @@
 			</nav>
 
 			<div id="page-wrapper">
-		  
+
 
 				<!-- /.row -->
 				<div class="row">
@@ -278,10 +283,10 @@
 			<img src="../images/walmart.jpg" alt="Walmart" style="width:100%;">
 			<div class="carousel-caption">
 			  <h3>Walmart</h3>
-			 
+
 			<button ng-click="toggleModal('store1.jpeg','Walmart')">Go!</button>
 			<!--<button ng-click="ShowHide('store1.jpeg')">Go!</button>-->
-		
+
 			</div>
 		  </div>
 		  <div class="item active">
@@ -303,16 +308,16 @@
 
 
 		</div>
-		    
+
   <modal title="Enter Date" visible="showModal">
     <form role="form">
 
       <div class="form-group">
-     
-	  <p>Date: <input type="text" id="datepicker" /></p></div>
+
+	  <p>Date: <input type="date" id="datepicker" max="2017-05-18"/></p></div>
       <button type="submit" class="btn btn-default">Submit</button>
     </form>
-	
+
 	</modal>
 
 		<!-- Left and right controls -->
@@ -328,21 +333,22 @@
 	</div>
 
 						</div>
-				  
+
 
 						<!-- /.panel -->
 					</div>
 					<!-- /.col-lg-8 -->
 					 </div>
 					<!-- /.col-lg-4 -->
-				
-				
-				
-			
+
+
+
+
 
 					  <!-- /.panel -->
-				   
+
 								<div class="row" ng-show = "IsVisible" style="margin: -40px;">
+								<div class="well">
 									<div class="col-lg-12">
 									  <div class="panel-content">
 						<div class="past_map">
@@ -350,25 +356,46 @@
 		<canvas  id ="myCanvas"  style=" width: 100%; height: 100%; position:absolute"></canvas>
 	  </div>
 	</div>
-
 									  </div>
 
 										<!-- /.table-responsive -->
 									</div>
+
 								   
+									</div><!-- /.col-lg-8 (nested) -->
+								</div>
+								<!-- /.row -->
+								<h1></h1>
+				                       <div class="well">
+									  <div class="row" ng-show = "IsVisible" >
+									  
+									<div class="col-md-12 text-center">
+								 
+								  <div id='pastchart1' class="chart"></div> 
+								  <h1></h1>
+								  <div id='pastchart2' class="chart"></div>
+								  <h1></h1>
+								  <div id='pastchart3' class="chart"></div>
+									</div>
+									  </div>
+
+				</div>
 									<!-- /.col-lg-8 (nested) -->
 								</div>
 								<!-- /.row -->
-					 
-		
+
+
 				<!-- /.row -->
+			
 			</div>
 			<!-- /#page-wrapper -->
 
 		</div>
 		<!-- /#wrapper -->
+
 	</div>
-	
+
+
 					<script type="text/javascript" src="js/hammer.min.js"></script>
 					<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
 					<script type="text/javascript" src="js/script.js"></script>
@@ -389,8 +416,8 @@
 
 		<script src="js/raphael.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
-	<script> 
-	  //need to add script
+	<script>
+
 		//document.getElementById("heatMap").style.backgroundImage = "url('images/store2.jpeg')";
 		var config = {
 			container: document.getElementById('heatMap'),
@@ -398,7 +425,7 @@
 			maxOpacity: 1,
 	  minOpacity: 0,
 	  blur: .5,
-	  
+
 		};
 	  var heatmapInstance = h337.create(config);
 
@@ -408,22 +435,160 @@
 			data: [{x: 500, y: 430, value: 1}, {x: 501, y: 431, value: 1}, {x: 502, y: 432, value: 1}, {x: 503, y: 433, value: 1}, {x: 504, y: 434, value: 1}, {x: 505, y: 435, value: 1}, {x: 506, y: 436, value: 1}]
 	  };
 	  heatmapInstance.setData(testData);
-		
+
 		for (i=0;i<5;i++){
+
+		var dataPoints = [{x: 120, y: 305, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 76, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 256, y: 201, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 130, value: 1}, {x: 88, y: 321, value: 1}, {x: 176, y: 219, value: 1}, {x: 300, y: 264, value: 1}, {x: 57, y: 231, value: 1} ]
+
 		var dataPoints = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
-		
+
 		function getRandomIndex (low, high) {
 		return Math.floor(Math.random() * (high - low + 1) + low);
 	}
 		var getrandomDensity = [dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)]]
-		
+
 		heatmapInstance.addData(getrandomDensity);
-			
-		} 
-		
-			
-			
+
+		}
+
+
+
 	</script>
+	
+	 <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart1);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+		function drawChart1(){
+		
+
+				var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Stores');
+        data.addColumn('number', 'Product Count');
+        data.addRows([
+          ['Bags', 3],
+          ['Shoes', 4],
+          ['Jeans', 2],
+          ['Watches', 4],
+          ['Sweaters', 2],
+			['Polos', 2],
+			['Shirts', 2]
+        ]);
+
+        // Set chart options
+        var options = {'title':'Products sold out Today',
+					   
+                       'width':1000,
+                       'height':400};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('pastchart1'));
+        chart.draw(data, options);	
+			}
+		 
+		google.charts.load('current', {'packages':['corechart']});
+		 google.charts.setOnLoadCallback(drawChart2);
+		 
+		 function drawChart2(){
+			 
+			 var data= google.visualization.arrayToDataTable([
+				['Store','Today','Yesterday'],
+				 ['Target',50,30],
+				 ['Costco',70,73],
+				 ['Walmart',36,30]
+				
+			 ]);
+			 
+			 var options = {
+        title: 'Customers visiting different stores',
+				 'width':1000,
+                       'height':400,
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: 'Total Customers',
+          minValue: 0,
+          textStyle: {
+            bold: false,
+            fontSize: 12,
+            color: '#4d4d4d'
+          },
+          titleTextStyle: {
+            bold: true,
+            fontSize: 18,
+            color: '#4d4d4d'
+          }
+        },
+        vAxis: {
+          title: 'Store',
+          textStyle: {
+            fontSize: 14,
+            bold: true,
+            color: '#848484'
+          },
+          titleTextStyle: {
+            fontSize: 18,
+            bold: true,
+            color: '#848484'
+          }
+        }
+      };
+		var chart = new google.visualization.BarChart(document.getElementById('pastchart2'));
+      chart.draw(data, options);	 
+		 }
+		 google.charts.load('current', {'packages':['corechart']});
+
+      // Load the Visualization API and the corechart package.
+      google.charts.setOnLoadCallback(drawCurveTypes);
+
+function drawCurveTypes() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Dogs');
+      data.addColumn('number', 'Cats');
+
+      data.addRows([
+        [0, 0, 0],    [1, 10, 5],   [2, 23, 15],  [3, 17, 9],   [4, 18, 10],  [5, 9, 5],
+        [6, 11, 3],   [7, 27, 19],  [8, 33, 25],  [9, 40, 32],  [10, 32, 24], [11, 35, 27],
+        [12, 30, 22], [13, 40, 32], [14, 42, 34], [15, 47, 39], [16, 44, 36], [17, 48, 40],
+        [18, 52, 44], [19, 54, 46], [20, 42, 34], [21, 55, 47], [22, 56, 48], [23, 57, 49],
+        [24, 60, 52], [25, 50, 42], [26, 52, 44], [27, 51, 43], [28, 49, 41], [29, 53, 45],
+        [30, 55, 47], [31, 60, 52], [32, 61, 53], [33, 59, 51], [34, 62, 54], [35, 65, 57],
+        [36, 62, 54], [37, 58, 50], [38, 55, 47], [39, 61, 53], [40, 64, 56], [41, 65, 57],
+        [42, 63, 55], [43, 66, 58], [44, 67, 59], [45, 69, 61], [46, 69, 61], [47, 70, 62],
+        [48, 72, 64], [49, 68, 60], [50, 66, 58], [51, 65, 57], [52, 67, 59], [53, 70, 62],
+        [54, 71, 63], [55, 72, 64], [56, 73, 65], [57, 75, 67], [58, 70, 62], [59, 68, 60],
+        [60, 64, 56], [61, 60, 52], [62, 65, 57], [63, 67, 59], [64, 68, 60], [65, 69, 61],
+        [66, 70, 62], [67, 72, 64], [68, 75, 67], [69, 80, 72]
+      ]);
+
+      var options = {
+		  width:1000,
+		  height:400,
+	
+        hAxis: {
+          title: 'Time'
+        },
+        vAxis: {
+          title: 'Popularity'
+        },
+        series: {
+          1: {curveType: 'function'}
+        }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('pastchart3'));
+      chart.draw(data, options);
+    }
+		 
+    		 
+    </script>
 
 
 	</body>
