@@ -54,6 +54,8 @@
 		<!-- Main JS (Do not remove) -->
 		<script src="js/main.js"></script>
 
+         <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 
 		<!-- Bootstrap Core JavaScript -->
@@ -458,40 +460,62 @@
 	 <script type="text/javascript">
 
       // Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
-
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart1);
-
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-		function drawChart1(){
-		
-
-				var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Stores');
-        data.addColumn('number', 'Product Count');
-        data.addRows([
-          ['Bags', 3],
-          ['Shoes', 4],
-          ['Jeans', 2],
-          ['Watches', 4],
-          ['Sweaters', 2],
-			['Polos', 2],
-			['Shirts', 2]
-        ]);
-
-        // Set chart options
-        var options = {'title':'Products sold out Today',
-					   
-                       'width':1000,
-                       'height':400};
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('pastchart1'));
-        chart.draw(data, options);	
-			}
+      Highcharts.chart('pastchart1', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Products Purchased'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Products',
+        colorByPoint: true,
+        data: [{
+            name: 'Sweaters',
+            y: 35
+        }, {
+            name: 'Polos',
+            y: 20,
+            selected: true
+        }, {
+            name: 'Watches',
+            y: 41
+        }, {
+            name: 'Shoes',
+            y: 30
+        }, {
+            name: 'Bags',
+            y: 18
+        }, {
+            name: 'Jeans',
+            y: 23
+        },{
+            name: 'Miscillenious',
+            y: 0.2
+        },
+			   
+			  ]
+    }]
+});
 		 
 		google.charts.load('current', {'packages':['corechart']});
 		 google.charts.setOnLoadCallback(drawChart2);
@@ -542,50 +566,41 @@
 		var chart = new google.visualization.BarChart(document.getElementById('pastchart2'));
       chart.draw(data, options);	 
 		 }
-		 google.charts.load('current', {'packages':['corechart']});
-
-      // Load the Visualization API and the corechart package.
-      google.charts.setOnLoadCallback(drawCurveTypes);
-
-function drawCurveTypes() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'X');
-      data.addColumn('number', 'Dogs');
-      data.addColumn('number', 'Cats');
-
-      data.addRows([
-        [0, 0, 0],    [1, 10, 5],   [2, 23, 15],  [3, 17, 9],   [4, 18, 10],  [5, 9, 5],
-        [6, 11, 3],   [7, 27, 19],  [8, 33, 25],  [9, 40, 32],  [10, 32, 24], [11, 35, 27],
-        [12, 30, 22], [13, 40, 32], [14, 42, 34], [15, 47, 39], [16, 44, 36], [17, 48, 40],
-        [18, 52, 44], [19, 54, 46], [20, 42, 34], [21, 55, 47], [22, 56, 48], [23, 57, 49],
-        [24, 60, 52], [25, 50, 42], [26, 52, 44], [27, 51, 43], [28, 49, 41], [29, 53, 45],
-        [30, 55, 47], [31, 60, 52], [32, 61, 53], [33, 59, 51], [34, 62, 54], [35, 65, 57],
-        [36, 62, 54], [37, 58, 50], [38, 55, 47], [39, 61, 53], [40, 64, 56], [41, 65, 57],
-        [42, 63, 55], [43, 66, 58], [44, 67, 59], [45, 69, 61], [46, 69, 61], [47, 70, 62],
-        [48, 72, 64], [49, 68, 60], [50, 66, 58], [51, 65, 57], [52, 67, 59], [53, 70, 62],
-        [54, 71, 63], [55, 72, 64], [56, 73, 65], [57, 75, 67], [58, 70, 62], [59, 68, 60],
-        [60, 64, 56], [61, 60, 52], [62, 65, 57], [63, 67, 59], [64, 68, 60], [65, 69, 61],
-        [66, 70, 62], [67, 72, 64], [68, 75, 67], [69, 80, 72]
-      ]);
-
-      var options = {
-		  width:1000,
-		  height:400,
-	
-        hAxis: {
-          title: 'Time'
-        },
-        vAxis: {
-          title: 'Popularity'
-        },
-        series: {
-          1: {curveType: 'function'}
+		 Highcharts.chart('pastchart3', {
+    chart: {
+        type: 'bar'
+    },
+    title: {
+        text: 'Stacked bar chart'
+    },
+    xAxis: {
+        categories: ['Food', 'Cosmetics', 'Electronics', 'Foot wear', 'Clothes']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Total Sales'
         }
-      };
-
-      var chart = new google.visualization.LineChart(document.getElementById('pastchart3'));
-      chart.draw(data, options);
-    }
+    },
+    legend: {
+        reversed: false
+    },
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+    series: [{
+        name: 'Traget',
+        data: [5, 8, 4, 7, 6]
+    }, {
+        name: 'Costco',
+        data: [10, 2, 8, 2, 5]
+    }, {
+        name: 'Walmart',
+        data: [7, 4, 4, 4, 4]
+    }]
+});
 		 
     		 
     </script>
