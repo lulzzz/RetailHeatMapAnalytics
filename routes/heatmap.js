@@ -101,7 +101,7 @@ exports.getdaily=function(req,res){
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('heatmapdaily');
-        coll.find({"timestamp": {"$gte": new Date(2017,4, 1), "$lt": new Date(2017,4,2)},"store":store}).toArray(function(err, result){
+        coll.find({"timestamp": {"$gte": new Date(start), "$lt": new Date(end)},"store":store}).toArray(function(err, result){
             if(result)
             {
 
@@ -122,7 +122,7 @@ exports.getdaily=function(req,res){
 exports.postdaily=function(req,res){
 
         var store=req.param('storename');
-        var current=req.param('current');
+        
         var coord=req.param('coord');
 
     mongo.connect(mongoURL, function(){

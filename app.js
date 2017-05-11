@@ -43,55 +43,37 @@ app.use(bodyParser.urlencoded({
 var html_dir = './views/';
 app.use('/',index);
 app.get('/past', function(req, res){
-  res.sendFile(html_dir +'past_analytics.html');
+    res.sendFile(html_dir +'past_analytics.html');
 });
 app.get('/modal', function(req, res){
-  res.sendFile(html_dir +'modal.html');
+    res.sendFile(html_dir +'modal.html');
 });
 
-app.post('/getheatmapdaily', function(req, res){
-  heatmap.getdaily
-});
+app.post('/getheatmapdaily',
+    heatmap.getdaily
+);
+app.post('/productCatalog',
+    analytics.productCatalog
+);
 
-app.post('/getheatmaphourly', function(req, res){
-  heatmap.gethourly
-});
+app.post('/postrandom',
+    heatmap.postrandom
+);
 
-app.post('/getheatmapmonthly', function(req, res){
-  heatmap.getmonthly
-});
+app.post('/getH',
+    heatmap.gethourly
+);
 
-app.post('/getheatmapyearly', function(req, res){
-  heatmap.getyearly
-});
-
-app.post('/heatmapdaily', function(req, res){
-  heatmap.postdaily
-});
-
-app.post('/getanalyticsdaily', function(req, res){
-  analytics.getdaily
-});
-
-app.post('/analyticsdaily', function(req, res){
-  analytics.postdaily
-});
+app.post('/analyticsdaily',
+    analytics.getanalyticsdaily);
 
 app.post('/analyticsProduct',
     analytics.getProduct);
 
-/*app.post('/getheatmapdaily',heatmap.getdaily);
-app.post('/getheatmaphourly',heatmap.gethourly);
-app.post('/getheatmapmonthly',heatmap.getmonthly);
-app.post('/getheatmapyearly',heatmap.getyearly);
-app.post('/heatmapdaily',heatmap.postdaily);
 
-app.post('/getanalyticsdaily',analytics.getdaily);
-app.post('/analyticsdaily',analytics.postdaily);
-*/
 
 
 app.listen(port, function(){
-  console.log('Server started on port '+ port);
+    console.log('Server started on port '+ port);
 });
 

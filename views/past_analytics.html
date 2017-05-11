@@ -243,7 +243,7 @@
 			<img src="../images/costco.jpg" alt="Costco" style="width:100%;">
 			<div class="carousel-caption">
 			  <h3>Costco</h3>
-			  <button ng-click="ShowHide('store3.jpeg')">Go!</button>
+			  <button ng-click="toggleModal('store3.jpeg','Costco')">Go!</button>
 			</div>
 		  </div>
 
@@ -251,7 +251,7 @@
 			<img src="../images/target.jpg" alt="Target" style="width:100%;">
 			<div class="carousel-caption">
 			  <h3>Target</h3>
-			<button ng-click="ShowHide('store2.jpeg')">Go!</button>
+			<button  ng-click="toggleModal('store2.jpeg','Target')">Go!</button>
 			</div>
 		  </div>
 
@@ -265,7 +265,7 @@
       <div class="form-group">
 
 	  <p>Date: <input type="date" id="datepicker" max="2017-05-18"/></p></div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-success" ng-click="getAnalysis()">Submit</button>
     </form>
 
 	</modal>
@@ -299,7 +299,7 @@
 
 								<div class="row" ng-show = "IsVisible" style="margin: -40px;">
 								 
- <form role="form"><input type="date" id="datepicker" max="2017-05-18"/></form>
+ <!--<form role="form"><input type="date" id="datepicker" max="2017-05-18"/></form>-->
 								<div class="well">
 									<div class="col-lg-12">
 									  <div class="panel-content">
@@ -371,37 +371,37 @@
 	<script>
 
 		//document.getElementById("heatMap").style.backgroundImage = "url('images/store2.jpeg')";
-		var config = {
-			container: document.getElementById('heatMap'),
-			radius: 17,
-			maxOpacity: 1,
-	  minOpacity: 0,
-	  blur: .5,
-
-		};
-	  var heatmapInstance = h337.create(config);
-
-	  var testData = {
-			min: 0,
-			max: 5,
-			data: [{x: 500, y: 430, value: 1}, {x: 501, y: 431, value: 1}, {x: 502, y: 432, value: 1}, {x: 503, y: 433, value: 1}, {x: 504, y: 434, value: 1}, {x: 505, y: 435, value: 1}, {x: 506, y: 436, value: 1}]
-	  };
-	  heatmapInstance.setData(testData);
-
-		for (i=0;i<5;i++){
-
-		var dataPoints = [{x: 120, y: 305, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 76, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 256, y: 201, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 130, value: 1}, {x: 88, y: 321, value: 1}, {x: 176, y: 219, value: 1}, {x: 300, y: 264, value: 1}, {x: 57, y: 231, value: 1} ]
-
-		var dataPoints = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
-
-		function getRandomIndex (low, high) {
-		return Math.floor(Math.random() * (high - low + 1) + low);
-	}
-		var getrandomDensity = [dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)]]
-
-		heatmapInstance.addData(getrandomDensity);
-
-		}
+//		var config = {
+//			container: document.getElementById('heatMap'),
+//			radius: 17,
+//			maxOpacity: 1,
+//	  minOpacity: 0,
+//	  blur: .5,
+//
+//		};
+//	  var heatmapInstance = h337.create(config);
+//
+//	  var testData = {
+//			min: 0,
+//			max: 5,
+//			data: [{x: 500, y: 430, value: 1}, {x: 501, y: 431, value: 1}, {x: 502, y: 432, value: 1}, {x: 503, y: 433, value: 1}, {x: 504, y: 434, value: 1}, {x: 505, y: 435, value: 1}, {x: 506, y: 436, value: 1}]
+//	  };
+//	  heatmapInstance.setData(testData);
+//
+//		for (i=0;i<5;i++){
+//
+//		var dataPoints = [{x: 120, y: 305, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 76, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 256, y: 201, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 130, value: 1}, {x: 88, y: 321, value: 1}, {x: 176, y: 219, value: 1}, {x: 300, y: 264, value: 1}, {x: 57, y: 231, value: 1} ]
+//
+//		var dataPoints = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
+//
+//		function getRandomIndex (low, high) {
+//		return Math.floor(Math.random() * (high - low + 1) + low);
+//	}
+//		var getrandomDensity = [dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)]]
+//
+//		heatmapInstance.addData(getrandomDensity);
+//
+//		}
 
 
 
@@ -410,63 +410,63 @@
 	 <script type="text/javascript">
 
       // Load the Visualization API and the corechart package.
-      Highcharts.chart('pastchart1', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Products Purchased'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                }
-            }
-        }
-    },
-    series: [{
-        name: 'Products',
-        colorByPoint: true,
-        data: [{
-            name: 'Sweaters',
-            y: 35
-        }, {
-            name: 'Polos',
-            y: 20,
-            selected: true
-        }, {
-            name: 'Watches',
-            y: 41
-        }, {
-            name: 'Shoes',
-            y: 30
-        }, {
-            name: 'Bags',
-            y: 18
-        }, {
-            name: 'Jeans',
-            y: 23
-        },{
-            name: 'Miscillenious',
-            y: 0.2
-        },
-			   
-			  ]
-    }]
-});
-		 
+//      Highcharts.chart('pastchart1', {
+//    chart: {
+//        plotBackgroundColor: null,
+//        plotBorderWidth: null,
+//        plotShadow: false,
+//        type: 'pie'
+//    },
+//    title: {
+//        text: 'Products Purchased'
+//    },
+//    tooltip: {
+//        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+//    },
+//    plotOptions: {
+//        pie: {
+//            allowPointSelect: true,
+//            cursor: 'pointer',
+//            dataLabels: {
+//                enabled: true,
+//                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+//                style: {
+//                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+//                }
+//            }
+//        }
+//    },
+//    series: [{
+//        name: 'Products',
+//        colorByPoint: true,
+//        data: [{
+//            name: 'Sweaters',
+//            y: 35
+//        }, {
+//            name: 'Polos',
+//            y: 20,
+//            selected: true
+//        }, {
+//            name: 'Watches',
+//            y: 41
+//        }, {
+//            name: 'Shoes',
+//            y: 30
+//        }, {
+//            name: 'Bags',
+//            y: 18
+//        }, {
+//            name: 'Jeans',
+//            y: 23
+//        },{
+//            name: 'Miscillenious',
+//            y: 0.2
+//        },
+//
+//			  ]
+//    }]
+//});
+//
 		google.charts.load('current', {'packages':['corechart']});
 		 google.charts.setOnLoadCallback(drawChart2);
 		 
