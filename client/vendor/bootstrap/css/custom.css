@@ -1,0 +1,104 @@
+.navbar-default {
+    background: url(main.png);border-color:#e7e7e7;}
+	.sidebar ul li {
+    border-bottom: 1px solid #e7e7e7;
+    float: left;
+    position: relative;
+    display: block;
+    margin: 0;
+    list-style: none;
+}
+.nav>li {
+    position: relative;
+    display: block;
+    float: left;
+    position: relative;
+    display: block;
+    margin: 0;
+    list-style: none;
+}
+.nav>li>a {padding:0px;}
+.container{       margin: 0px;
+    padding: 19px 0px;
+    width: 100%;
+    background: url(big-design-up.png) repeat-x left bottom 0px;}
+	.nav-pills>li>a {
+    padding: 10px 20px 10px 2px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: larger;
+	    color: white;
+}
+
+#nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    min-width: 200px;
+}
+#nav ul li {
+    display: inline-block;
+}
+.container h1{    width: 20%;
+    margin-bottom: 0px;
+    float: left;}
+#nav ul li:hover, .nav li:hover , .nav li a:hover {
+    background-color: #337ab7;
+}
+#nav ul li a{
+
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+	    text-align: center;
+}
+.first{
+    margin-left: 48px;
+    width: 137px;
+}
+#nav ul li:hover ul {
+    display: block;
+}
+#nav ul ul {
+    display: none;
+    position: absolute;
+    background-color: white;
+	color: #337ab7;
+	font-size: 20px;
+    border-top: 0;
+    margin-left: -5px;
+	morgin-top: 5px;
+	border: 2px solid #337ab7;
+}
+#nav ul ul li {
+    display: block;
+}
+#nav ul ul li a:hover {
+    color: black;
+}
+#nav>ul{     width: 62%;
+    float: right;}
+.new-ribb{
+    position: absolute;
+    content: "";
+    background: url(small-design-down.png) repeat-x 6px bottom;
+    left: 0;
+    bottom: -9px;
+    height: 10px;
+    width: 100%;
+    visibility: visible;
+}
+#page-wrapper{  margin-left: 114px;}
+*[role="presentation"] {
+	width:165px;
+  /* style these a buttons w/o relying on a .button class */
+}
+.panel-heading ul{    padding: 0px 10px;
+    margin: 10px;
+    font-size: x-large;
+    color: blue;}
+	
+	.panel-heading ul li{background-color: #afc9d1;width: 200px;}
+
+.mapplic-list-category > a,.panel-default>.panel-heading , .carousel-caption button{  background-color: #337ab7!important;}
