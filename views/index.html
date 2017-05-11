@@ -298,8 +298,8 @@
                             </li>
                             <li role="presentation"><a data-toggle="tab" href="#costco_heatmap" class="heatm" id="costcoH">HeatMap</a>
                             </li>
-                            <li role="presentation"><a data-toggle="tab" href="#costco_productCatalog">Product Catalog</a></li>
-							              <li role="presentation"><a data-toggle="tab" href="#costco_store360view">360 degree view</a></li>
+                            <li role="presentation"><a data-toggle="tab" class="productCat" id="costcoProducts" href="#costco_productCatalog">Product Catalog</a></li>
+							              <li role="presentation"><a data-toggle="tab" class="ThreeDview" id="costco3D" href="#costco_store360view">360 degree view</a></li>
                         </ul>
 
                         <div >
@@ -318,7 +318,7 @@
 
                             </div>
                             <!--END target_heatmap-->
-							<div id="costco_productCatalog" class="tab-pane fade">
+							      <div id="costco_productCatalog" class="tab-pane fade">
 											 <h3 align="center">Real Time Product Count Tracker</h3>
 										</div>
 										<div id="costco_store360view" class="tab-pane fade">
@@ -340,22 +340,17 @@
                             </li>
                             <li role="presentation"><a data-toggle="tab" class="heatm" href="#target_heatmap" id="targetH">HeatMap</a>
                             </li>
-                            <li role="presentation"><a data-toggle="tab" href="#target_productCatalog">Product Catalog</a></li>
-							<li role="presentation"><a data-toggle="tab" href="#target_store360view">360 degree view</a></li>
+                            <li role="presentation"><a data-toggle="tab" class="productCat" id="targetProducts" href="#target_productCatalog">Product Catalog</a></li>
+						              	<li role="presentation"><a data-toggle="tab" class="ThreeDview" id ="target3D" href="#target_store360view">360 degree view</a></li>
 
                         </ul>
 
                         <div>
                             <h3 align="center"> Welcome to Target</h3>
                             <div id="target_store" class="tab-pane fade">
-
-
-
                                 <div id="disply_st2"></div>
                             </div>
                             <!--END target_store-->
-
-
 
                             <div id="target_heatmap" class="tab-pane fade">
                                 <h3 align="center">Current HeatMap</h3>
@@ -396,8 +391,8 @@
                             </li>
                             <li role="presentation"><a data-toggle="tab" class="heatm" href="#walmart_heatmap" id="walmartH">HeatMap</a>
                             </li>
-                            <li role="presentation"><a data-toggle="tab" href="#walmart_productCatalog">Product Catalog</a></li>
-							  <li role="presentation"><a data-toggle="tab" href="#walmart_store360view">360 degree view</a></li>
+                            <li role="presentation"><a data-toggle="tab" class="productCat" id="walmartProducts" href="#walmart_productCatalog">Product Catalog</a></li>
+							  <li role="presentation"><a data-toggle="tab" class="ThreeDview" id="walmart3D" href="#walmart_store360view">360 degree view</a></li>
 
                         </ul>
 
@@ -518,15 +513,47 @@
     <script src="js/raphael.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
     <script>
-        document.getElementById("cheatMap").style.backgroundImage = "url('images/store3.jpeg')";
+    document.getElementById("cheatMap").style.backgroundImage = "url('images/store3.jpeg')";
 		document.getElementById("theatMap").style.backgroundImage = "url('images/store2.jpeg')";
-		 document.getElementById("wheatMap").style.backgroundImage = "url('images/store1.jpeg')";
+		document.getElementById("wheatMap").style.backgroundImage = "url('images/store1.jpeg')";
 
      function scroll_to(div){
        $('html, body').animate({
          scrollTop: div.offset().top - $('#topNavBar').height()
        },1000);
      }
+
+     $(".productCat").click(function(event){
+       var _main;
+       if(event.target.id== "costcoProducts")
+       {_main= '#costcoStoreMap'}
+       else  if(event.target.id== "targetProducts")
+        {_main= '#targetStoreMap'}
+       else if(event.target.id== "walmartProducts")
+        {_main= '#walmartStoreMap'}
+
+       scroll_to($(_main));
+       $(".tab-pane").addClass("fade");
+       $(_main +" .tab-pane").eq(2).removeClass("fade");
+
+     });
+
+     $(".ThreeDview").click(function(event){
+       var _main;
+       if(event.target.id== "costco3D")
+       {_main= '#costcoStoreMap'}
+       else  if(event.target.id== "target3D")
+        {_main= '#targetStoreMap'}
+       else if(event.target.id== "walmart3D")
+        {_main= '#walmartStoreMap'}
+
+       scroll_to($(_main));
+       $(".tab-pane").addClass("fade");
+       $(_main +" .tab-pane").eq(3).removeClass("fade");
+
+     });
+
+
 
         $(".heatm").click(function(event) {
 
@@ -546,14 +573,11 @@ console.log("",event.target.id);
 			console.log(_main +" .tab-pane");
            $(_main +" .tab-pane").eq(1).removeClass("fade");
             var config = {
-
-
                 container: document.getElementById(_elem),
                 radius: 17,
                 maxOpacity: 1,
                 minOpacity: 0,
                 blur: .5,
-
             };
             var heatmapInstance = h337.create(config);
 
