@@ -167,64 +167,14 @@
                             <ul class="nav nav-second-level">
 
                                 <li>
-                                    <a href="#" >Costco <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a ng-click="costcoStore()">Store Page</a>
-                                        </li>
-                                        <li>
-                                            <a ng-click="">HeatMap</a>
-                                        </li>
-                                        <li>
-               <a href="#">Product Catalog</a>
-                                        </li>
-										<li>
-                                            <a href="#">Store 360 View</a>
-                                       
-                                        </li>
-
-                                    </ul>
-                                    <!-- /.nav-third-level -->
+                                    <a ng-click="costcoStore()" id="costcoNavBar">Costco</a>
                                 </li>
                                 <li>
-                                    <a href="#">Target <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a ng-click="targetStore()">Store Page</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">HeatMap</a>
-                                        </li>
-                                         <li>
-                                            <a href="#">Product Catalog</a>
-                                        </li>
-										<li>
-                                            <a href="#">Store 360 View</a>
-                                        </li>                                 
-                                  
-
-                                    </ul>
-                                    <!-- /.nav-third-level -->
+                                    <a ng-click="targetStore()" id="targetNavBar">Target</a>
                                 </li>
 
                                 <li>
-                                    <a href="#">Walmart <span class="fa arrow"></span></a>
-                                    <ul class="nav nav-third-level">
-                                        <li>
-                                            <a ng-click="walmartStore()">Store Page</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">HeatMap</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Product Catalog</a>
-                                        </li>
-										<li>
-                                            <a href="#">Store 360 View</a>
-                                        </li>                                    
-
-                                    </ul>
-                                    <!-- /.nav-third-level -->
+                                    <a ng-click="walmartStore()" id="walmartNavBar">Walmart</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -314,7 +264,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="panel-body">
-                               <span>Provide description here</span> 
+                               <span>Provide description here</span>
 
                             </div>
 
@@ -348,23 +298,15 @@
                             <li role="presentation"><a data-toggle="tab" href="#costco_heatmap" class="heatm" id="costcoH">HeatMap</a>
                             </li>
                             <li role="presentation"><a data-toggle="tab" href="#costco_productCatalog">Product Catalog</a></li>
-							<li role="presentation"><a data-toggle="tab" href="#costco_store360view">360 degree view</a></li>
-                 
+							              <li role="presentation"><a data-toggle="tab" href="#costco_store360view">360 degree view</a></li>
                         </ul>
 
                         <div >
-
                             <h3 align="center"> Welcome to Costco</h3>
                             <div id="costco_store" class="tab-pane fade">
-
-
-
                                 <div id="disply_st1"></div>
                             </div>
                             <!--END target_store-->
-
-
-
                             <div id="costco_heatmap" class="tab-pane fade">
                                 <h3 align="center">Current HeatMap</h3>
                                 <div class="past_map">
@@ -399,7 +341,7 @@
                             </li>
                             <li role="presentation"><a data-toggle="tab" href="#target_productCatalog">Product Catalog</a></li>
 							<li role="presentation"><a data-toggle="tab" href="#target_store360view">360 degree view</a></li>
-                 
+
                         </ul>
 
                         <div>
@@ -440,10 +382,6 @@
 					  </div> <!--END target_360 degree view-->
                         </div>
                         <!--END tab-content-->
-
-
-
-
                     </div>
 
                     <!-- /.table-responsive -->
@@ -458,8 +396,8 @@
                             <li role="presentation"><a data-toggle="tab" class="heatm" href="#walmart_heatmap" id="walmartH">HeatMap</a>
                             </li>
                             <li role="presentation"><a data-toggle="tab" href="#walmart_productCatalog">Product Catalog</a></li>
-							<li role="presentation"><a data-toggle="tab" href="#walmart_store360view">360 degree view</a></li>
-                 
+							  <li role="presentation"><a data-toggle="tab" href="#walmart_store360view">360 degree view</a></li>
+
                         </ul>
 
                         <div>
@@ -492,7 +430,7 @@
 
                             </div>
                             <!--END target_heatmap-->
-	  <div id="walmart_productCatalog"  class="tab-pane fade">
+               <div id="walmart_productCatalog"  class="tab-pane fade">
 												<h3 align="center">Real Time Product Count Tracker</h3>
 
 										  </div>
@@ -582,8 +520,8 @@
         document.getElementById("cheatMap").style.backgroundImage = "url('images/store3.jpeg')";
 		document.getElementById("theatMap").style.backgroundImage = "url('images/store2.jpeg')";
 		 document.getElementById("wheatMap").style.backgroundImage = "url('images/store1.jpeg')";
-		  
-      
+
+
         $(".heatm").click(function(event) {
 
 console.log("",event.target.id);
@@ -595,9 +533,9 @@ console.log("",event.target.id);
   {_elem = 'theatMap'; _main= '#targetStoreMap'}
  else if(event.target.id== "walmartH")
   {_elem = 'wheatMap';_main= '#walmartStoreMap'}
- 
- 
- 
+
+
+
 			$(".tab-pane").addClass("fade");
 			console.log(_main +" .tab-pane");
            $(_main +" .tab-pane").eq(1).removeClass("fade");

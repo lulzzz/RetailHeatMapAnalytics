@@ -1,5 +1,5 @@
 var ang= angular.module("prod",[]);
-ang.controller("ProdController", function($scope,$http){
+ang.controller("ProdController", function($scope,$http, $location, $anchorScroll){
 
       $scope.IsVisible = false;
             $scope.ShowHide = function (store) {
@@ -14,7 +14,7 @@ ang.controller("ProdController", function($scope,$http){
                 $scope.IsVisible = true;
 			//	alert("store"+store);
             }
-			
+
     $scope.showModal = false;
     $scope.toggleModal = function(img,name){
 		//alert("",img);
@@ -22,14 +22,17 @@ ang.controller("ProdController", function($scope,$http){
     };
 
 $scope.costcoHeatMap = function(store){
-	  $scope.costcoStoreMap=true;
+	$scope.costcoStoreMap=true;
 	$scope.costcoMap=true;
 	$scope.bimage ={backgroundImage: "url('images/"+ store+"')" };
 
-	
+
 }
 
 $scope.costcoStore = function(){
+  $("#costcoNavBar").addClass("active");
+  $("#targetNavBar").removeClass("active");
+  $("#walmartNavBar").removeClass("active");
 	$scope.costcoStoreMap = true;
 	$scope.targetStoreMap = false;
 	$scope.walmartStoreMap = false;
@@ -38,6 +41,9 @@ $scope.costcoStore = function(){
 }
 
 $scope.targetStore = function(){
+  $("#targetNavBar").addClass("active");
+  $("#walmartNavBar").removeClass("active");
+  $("#costcoNavBar").removeClass("active");
 	$scope.targetStoreMap = true;
 	$scope.costcoStoreMap = false;
 	$scope.walmartStoreMap = false;
@@ -45,6 +51,9 @@ $scope.targetStore = function(){
 	$("#targetStoreMap .tab-pane").eq(0).removeClass("fade");
 }
 $scope.walmartStore = function(){
+  $("#walmartNavBar").addClass("active");
+  $("#targetNavBar").removeClass("active");
+  $("#costcoNavBar").removeClass("active");
 	$scope.targetStoreMap = false;
 	$scope.costcoStoreMap = false;
 		$scope.walmartStoreMap = true;
@@ -63,17 +72,17 @@ $scope.products =  [
 
 ang.directive('modal', function () {
     return {
-      template: '<div class="modal fade">' + 
-          '<div class="modal-dialog">' + 
-            '<div class="modal-content">' + 
-              '<div class="modal-header">' + 
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
-                '<h4 class="modal-title">{{ title }}</h4>' + 
-              '</div>' + 
-              '<div class="modal-body" ng-transclude></div>' + 
-			  
-            '</div>' + 
-          '</div>' + 
+      template: '<div class="modal fade">' +
+          '<div class="modal-dialog">' +
+            '<div class="modal-content">' +
+              '<div class="modal-header">' +
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+                '<h4 class="modal-title">{{ title }}</h4>' +
+              '</div>' +
+              '<div class="modal-body" ng-transclude></div>' +
+
+            '</div>' +
+          '</div>' +
         '</div>',
       restrict: 'E',
       transclude: true,
@@ -103,5 +112,3 @@ ang.directive('modal', function () {
       }
     };
   });
-  
-  
