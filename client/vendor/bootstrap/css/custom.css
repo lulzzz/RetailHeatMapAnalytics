@@ -1,11 +1,12 @@
 .navbar-default {
-    background: url(main.png);border-color:#e7e7e7;}
+    background: url(main.png);border-color:#e7e7e7;    border: none;}
 	.sidebar ul li {
     border-bottom: 1px solid #e7e7e7;
     float: left;
     position: relative;
     display: block;
     margin: 0;
+	
     list-style: none;
 }
 .nav>li {
