@@ -247,17 +247,16 @@
                 <div class="col-lg-4">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-shopping-cart fa-fw"></i> Product Details
+                            <span>Our locations</span>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="panel-body">
-                               <span>Provide description here</span>
-
-                            </div>
+                            
+                                 <div id="map" style="height: 330px;"></div>
+                            
 
                             <!-- /.list-group -->
-                            <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+                             
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -951,6 +950,38 @@ console.log("",event.target.id);
             });
 
         });
+    </script>
+    <script>
+
+      function initMap() {
+        var myLatLng = {lat: 37.3382, lng: -121.8863};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: myLatLng
+        });
+
+        var marker = new google.maps.Marker({
+          
+          map: map,
+          title: 'Spartan Mall',
+          animation: google.maps.Animation.DROP,
+          position: myLatLng
+          
+        });
+        marker.addListener('click', toggleBounce);
+      }
+       function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbAaaR72saQ60FVbM3OiB_U8h7G_BbCzc&callback=initMap">
     </script>
 </body>
 
