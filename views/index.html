@@ -43,6 +43,8 @@
   	<script src="js/respond.min.js"></script>
   	<![endif]-->
     <style>
+
+
         #target {
             background: no-repeat;
             width: 100%;
@@ -146,7 +148,6 @@
 </head>
 
 <body ng-app="prod" ng-controller="ProdController">
-
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -154,7 +155,7 @@
             <h3 align="center">Retail Heat Map Analytics</h3>
 
 
-            <div class="navbar-default sidebar" role="navigation">
+            <div class="navbar-default sidebar" role="navigation" style="position:fixed;">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
 
@@ -198,7 +199,7 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top" id ="topNavBar">
             <div class="container">
                 <ul class="nav nav-pills">
                     <li role="presentation" class="active"><a href="/">Home</a>
@@ -521,6 +522,11 @@
 		document.getElementById("theatMap").style.backgroundImage = "url('images/store2.jpeg')";
 		 document.getElementById("wheatMap").style.backgroundImage = "url('images/store1.jpeg')";
 
+     function scroll_to(div){
+       $('html, body').animate({
+         scrollTop: div.offset().top - $('#topNavBar').height()
+       },1000);
+     }
 
         $(".heatm").click(function(event) {
 
@@ -535,7 +541,7 @@ console.log("",event.target.id);
   {_elem = 'wheatMap';_main= '#walmartStoreMap'}
 
 
-
+      scroll_to($(_main));
 			$(".tab-pane").addClass("fade");
 			console.log(_main +" .tab-pane");
            $(_main +" .tab-pane").eq(1).removeClass("fade");

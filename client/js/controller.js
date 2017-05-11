@@ -1,6 +1,6 @@
 var ang= angular.module("prod",[]);
 ang.controller("ProdController", function($scope,$http, $location, $anchorScroll){
-
+      $anchorScroll.yOffset = 75;
       $scope.IsVisible = false;
             $scope.ShowHide = function (store) {
                 //If DIV is visible it will be hidden and vice versa.
@@ -25,8 +25,6 @@ $scope.costcoHeatMap = function(store){
 	$scope.costcoStoreMap=true;
 	$scope.costcoMap=true;
 	$scope.bimage ={backgroundImage: "url('images/"+ store+"')" };
-
-
 }
 
 $scope.costcoStore = function(){
@@ -38,6 +36,8 @@ $scope.costcoStore = function(){
 	$scope.walmartStoreMap = false;
 	$(".tab-pane").addClass("fade");
 	$("#costcoStoreMap .tab-pane").eq(0).removeClass("fade");
+  $location.hash('costcoStoreMap');
+  $anchorScroll();
 }
 
 $scope.targetStore = function(){
@@ -49,6 +49,8 @@ $scope.targetStore = function(){
 	$scope.walmartStoreMap = false;
 	$(".tab-pane").addClass("fade");
 	$("#targetStoreMap .tab-pane").eq(0).removeClass("fade");
+  $location.hash('targetStoreMap');
+  $anchorScroll();
 }
 $scope.walmartStore = function(){
   $("#walmartNavBar").addClass("active");
@@ -59,6 +61,8 @@ $scope.walmartStore = function(){
 		$scope.walmartStoreMap = true;
 	$(".tab-pane").addClass("fade");
 	$("#walmartStoreMap .tab-pane").eq(0).removeClass("fade");
+  $location.hash('walmartStoreMap');
+  $anchorScroll();
 }
 
 
