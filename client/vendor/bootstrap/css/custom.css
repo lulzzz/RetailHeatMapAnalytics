@@ -1,3 +1,4 @@
+	.floatl{float: right !important;}
 .navbar-default {
     background: url(main.png);border-color:#e7e7e7;    border: none;}
 	.sidebar ul li {
@@ -9,6 +10,8 @@
 	
     list-style: none;
 }
+body , html{height:100vh;}
+
 .nav>li {
     position: relative;
     display: block;
@@ -19,10 +22,9 @@
     list-style: none;
 }
 .nav>li>a {padding:0px;    text-align: center;}
-.container{       margin: 0px;
-    padding: 19px 0px;
-    width: 100%;
-    background: url(big-design-up.png) repeat-x left bottom 0px;}
+.container{          margin: 0px;
+    padding: 12px 0px;
+    width: 100%;}
 	.nav-pills>li>a {
     padding: 10px 20px 10px 2px;
     border-radius: 4px;
@@ -30,7 +32,8 @@
     font-size: larger;
 	    color: white;
 }
-
+.panel-default>.panel-heading {
+color: #f5f5f5;}
 #nav ul {
     list-style-type: none;
     padding: 0;
@@ -45,7 +48,7 @@
     margin-bottom: 0px;
     float: left;}
 #nav ul li:hover, .nav li:hover , .nav li a:hover {
-    background-color: #337ab7;
+    background-color: #46609a;
 }
 #nav ul li a{
 
@@ -65,12 +68,12 @@
     display: none;
     position: absolute;
     background-color: white;
-	color: #337ab7;
+	color: #46609a;
 	font-size: 20px;
     border-top: 0;
     margin-left: -5px;
 	morgin-top: 5px;
-	border: 2px solid #337ab7;
+	border: 2px solid #46609a;
 }
 #nav ul ul li {
     display: block;
@@ -78,7 +81,7 @@
 #nav ul ul li a:hover {
     color: black;
 }
-#nav>ul{     width: 62%;
+#nav>ul{     width: 79%;
     float: right;}
 .new-ribb{
     position: absolute;
@@ -92,9 +95,9 @@
 }
 #page-wrapper{  margin-left: 114px;}
 *[role="presentation"] {
-	width:165px;
-  /* style these a buttons w/o relying on a .button class */
+    width: 12%;
 }
+
 .panel-heading ul{    padding: 0px 10px;
     margin: 10px;
     font-size: x-large;
@@ -102,4 +105,11 @@
 	
 	.panel-heading ul li{background-color: #afc9d1;width: 200px;}
 
-.mapplic-list-category > a,.panel-default>.panel-heading , .carousel-caption button{  background-color: #337ab7!important;}
+.mapplic-list-category > a,.panel-default>.panel-heading , .carousel-caption button{  background-color: #46609a!important;}
+.navbar_footer{  background: url(main.png);
+    border-color: #e7e7e7;
+    border: none;
+
+    width: 100%;
+    padding: 23px;
+    }

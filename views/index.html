@@ -163,7 +163,21 @@
                     </li>
  
 
-                        <li style="margin-left: 80px">
+                    
+
+                     
+                     
+                        <li class="floatl">
+                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Feedback</a>
+                        </li>
+						   <li class="floatl">
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Contact Us</a>
+                        </li>
+						   <li class="floatl">
+                            <a href="#"><i class="fa fa-table fa-fw"></i> About Us</a>
+                        </li>
+
+    <li style="margin-left:2%" class="floatl">
                             <a href="#"><i class="fa fa-sitemap"></i> Our Stores</a>
                             <ul class="nav-second-level">
 
@@ -180,18 +194,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-
-                        <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> About Us</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-edit fa-fw"></i> Contact Us</a>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Feedback</a>
-                        </li>
-
-
+						
                     </ul>
              
 </div>
@@ -457,8 +460,9 @@
         <!-- /#page-wrapper -->
 
         </div>
-        <!-- /#wrapper -->
-    </div>
+<footer class=" text-center navbar_footer">
+  <p>Footer Text</p>
+</footer>
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
     <!-- jQuery Easing -->
@@ -507,6 +511,15 @@
                 fullscreen: true, // Enable fullscreen
                 maxscale: 3 // Setting maxscale to 3 times bigger than the original file
             });
+			
+			var responsiveNav = document.getElementById('topNavBar');
+var responsiveNavBreakpoint = 720;
+
+responsiveNav.addEventListener('click', function(){
+    if(window.innerWidth < responsiveNavBreakpoint){
+        responsiveNav.classList.toggle("is-open");
+    }
+});
         });
     </script>
 
