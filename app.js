@@ -45,6 +45,9 @@ app.use('/',index);
 app.get('/past', function(req, res){
     res.sendFile(html_dir +'past_analytics.html');
 });
+app.get('/about', function(req, res){
+    res.sendFile(html_dir +'aboutUS.html');
+});
 app.get('/modal', function(req, res){
     res.sendFile(html_dir +'modal.html');
 });

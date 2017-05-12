@@ -9,7 +9,7 @@
     <meta name="description" content="Application which provides retail owners a means to analyze crowd density" />
     <meta name="keywords" content="retail, heatmap, crowd, density, beahvior" />
     <meta name="author" content="Shruthi Kulai, Taruna Arora, Mukul Bajpai, Ravali Peddi, Jagmohan Singh" />
-
+<meta name="viewport" content="width=device-width" />
     <title>Retail Heat Map Analytics</title>
 
     <!-- Bootstrap Core CSS -->
@@ -79,6 +79,15 @@
         }
     </style>
     <style>
+	.goog-te-banner-frame.skiptranslate{display: none;!important;}
+        body{top: 0px!important;}
+          
+        .google_translate_element a {
+  display: none;
+}
+.goog-te-gadget-icon {
+   display:none !important;
+} 
         .row {
             display: block;
         }
@@ -155,8 +164,8 @@
 
           <nav class="navbar navbar-default navbar-fixed-top" id ="topNavBar">
             <div class="container" id="nav">
-			<h1>Retail Crowd Analysis</h1>
-                <ul class="nav nav-pills" id="side-menu">
+			<h1 class="sec">Retail Crowd Analysis</h1>
+                <ul class="nav nav-pills topnav" id="side-menu">
                     <li role="presentation" class=" first active"><a href="/">Home</a>
                     </li>
                     <li role="presentation"><a href="/past">Past Analytics</a>
@@ -167,17 +176,17 @@
 
                      
                      
-                        <li class="floatl">
+                        <li class="floatl sec">
                             <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Feedback</a>
                         </li>
-						   <li class="floatl">
+						   <li class="floatl sec">
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Contact Us</a>
                         </li>
-						   <li class="floatl">
-                            <a href="#"><i class="fa fa-table fa-fw"></i> About Us</a>
+						   <li class="floatl sec">
+                            <a href="/about"><i class="fa fa-table fa-fw"></i> About Us</a>
                         </li>
 
-    <li style="margin-left:2%" class="floatl">
+    <li style="margin-left:2%" class="floatl ">
                             <a href="#"><i class="fa fa-sitemap"></i> Our Stores</a>
                             <ul class="nav-second-level">
 
@@ -194,6 +203,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+						<li  class="icon-fold" > <a href="javascript:void(0);" style="font-size:15px;" onclick="myFunction()">&#9776;</a>
+</li>
 						
                     </ul>
              
@@ -460,8 +471,18 @@
         <!-- /#page-wrapper -->
 
         </div>
+		
+<div id="google_translate_element"></div>
+                            <script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'de,en,es,fr,hi,it,kn,pa,te,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
 <footer class=" text-center navbar_footer">
-  <p>Footer Text</p>
+  <p>Copyright: team-innovator@sjsu.edu</p>
 </footer>
     <!-- jQuery -->
     <script src="js/jquery.min.js"></script>
@@ -479,7 +500,31 @@
     <!-- Main JS (Do not remove) -->
     <script src="js/main.js"></script>
 
+<script>
+function myFunction() {
 
+    var x = document.getElementById("side-menu");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+}
+
+$(window).resize(function() {
+
+    var ItemWidth = $(window).width();
+	console.log("",ItemWidth);
+	if(ItemWidth < 700)
+	{
+	$(".topnav").addClass("responsive");
+	$("#page-wrapper").addClass("resp");
+	$(".sec").css('display','none');
+	
+	}
+  //  $('#item').css("margin-left",PadWidth + "px");
+    });
+</script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -511,16 +556,9 @@
                 fullscreen: true, // Enable fullscreen
                 maxscale: 3 // Setting maxscale to 3 times bigger than the original file
             });
-			
-			var responsiveNav = document.getElementById('topNavBar');
-var responsiveNavBreakpoint = 720;
 
-responsiveNav.addEventListener('click', function(){
-    if(window.innerWidth < responsiveNavBreakpoint){
-        responsiveNav.classList.toggle("is-open");
-    }
-});
         });
+		
     </script>
 
     <script src="js/raphael.min.js"></script>

@@ -1,3 +1,22 @@
+	
+@media screen and (max-width: 700px)
+{
+.topnav li.floatl {
+    display: none;
+}
+.topnav .icon-fold {
+    display: none!important;
+}
+}
+@media screen and (min-width: 700px)
+{
+	.topnav a.icon-fold {
+    float: right;
+    display: block!important;
+}
+.floatl{display:none;}
+}
+	
 	.floatl{float: right !important;}
 .navbar-default {
     background: url(main.png);border-color:#e7e7e7;    border: none;}
@@ -41,15 +60,15 @@ color: #f5f5f5;}
     position: relative;
     min-width: 200px;
 }
+.well {
+min-height: 0px;padding:0px;margin:0px;}
 #nav ul li {
     display: inline-block;
 }
 .container h1{    width: 20%;
     margin-bottom: 0px;
     float: left;}
-#nav ul li:hover, .nav li:hover , .nav li a:hover {
-    background-color: #46609a;
-}
+
 #nav ul li a{
 
     display: block;
@@ -113,3 +132,13 @@ color: #f5f5f5;}
     width: 100%;
     padding: 23px;
     }
+	
+	.resp .row{margin-left:-150px;}
+.responsive li{position: relative;
+width: 30%;}
+.responsive{width:50%;}
+
+.responsive .icon-fold{position: absolute;
+    top: -51px;
+    right: 10px;}
+	.icon-fold{display:none!important;}
