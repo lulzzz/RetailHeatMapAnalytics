@@ -193,6 +193,39 @@ exports.getProduct=function(req,res){
 
 
 };
+
+exports.currentcatalog=function (req,res) {
+
+    mongo.connect(mongoURL, function(){
+        console.log('Connected to mongo at: ' + mongoURL);
+        var coll = mongo.collection('analyticsdaily');
+        coll.aggregate([ {$match:{"timestamp":{$gte: start, $lt: end},"store":store}},
+            {
+                $project: {
+                    _id:0,
+                    timestamp:1,
+                    productcatalog: { $size: "$coord" }
+                }
+            }
+        ]).toArray(function(err, result){
+            if(result)
+            {
+                console.log(result);
+                res.status(200).send({"result":result});
+            }
+            else
+            {
+                console.log(err);
+                res.status(401).send({"result":"Failed"});
+
+            }
+
+        });
+
+    });
+
+
+}
 exports.getperson=function(req,res){
 
 

@@ -58,6 +58,7 @@ app.get('/about', function(req, res){
 app.post('/productCatalog',
     analytics.productCatalog
 );
+app.get('/currentcatalog',analytics.currentcatalog);
 app.post('/getcategory',analytics.getcategory);
 app.post('/postrandom',
     heatmap.postrandom
@@ -66,7 +67,7 @@ app.get('/numberofperson',analytics.getperson);
 app.post('/getcurrentheatmap',
     heatmap.getCurrent);
 
-
+app.get('/')
 
 
 app.post('/analyticsProduct',
