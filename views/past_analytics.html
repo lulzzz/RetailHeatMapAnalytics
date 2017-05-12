@@ -320,6 +320,19 @@
 									<div class="col-lg-12">
 									  <div class="panel-content">
 						<div class="past_map">
+							<a ng-click="heatmaptimeline(0)" class="btn btn-info">09:30 AM</a>
+							<a ng-click="heatmaptimeline(1)" class="btn btn-info">10:30 AM</a>
+							<a ng-click="heatmaptimeline(2)" class="btn btn-info">11:30 AM</a>
+							<a ng-click="heatmaptimeline(3)" class="btn btn-info">12:30 AM</a>
+							<a ng-click="heatmaptimeline(4)" class="btn btn-info">01:30 PM</a>
+							<a ng-click="heatmaptimeline(5)" class="btn btn-info">02:30 PM</a>
+							<a ng-click="heatmaptimeline(6)" class="btn btn-info">03:30 PM</a>
+							<a ng-click="heatmaptimeline(7)" class="btn btn-info">04:30 PM</a>
+							<a ng-click="heatmaptimeline(8)" class="btn btn-info">05:30 PM</a>
+							<a ng-click="heatmaptimeline(9)" class="btn btn-info">06:30 PM</a>
+							<a ng-click="heatmaptimeline(10)" class="btn btn-info">07:30 PM</a>
+							<a ng-click="heatmaptimeline(11)" class="btn btn-info">08:30 PM</a>
+							<a ng-click="heatmaptimeline(12)" class="btn btn-info">09:30 PM</a>
 	  <div id='heatMap' ng-style="backimage">
 		<canvas  id ="myCanvas"  style=" width: 100%; height: 100%; position:absolute"></canvas>
 	  </div>
@@ -385,7 +398,15 @@
 		<script src="js/raphael.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.no-deps.js"></script>
 	<script>
+        var config = {
+            container: document.getElementById('heatMap'),
+            radius: 22,
+            maxOpacity: 1,
+            minOpacity: 0,
+            blur: .5,
 
+        };
+        var heatmapInstance = h337.create(config);
 		//document.getElementById("heatMap").style.backgroundImage = "url('images/store2.jpeg')";
 //		var config = {
 //			container: document.getElementById('heatMap'),
@@ -482,93 +503,93 @@
 //			  ]
 //    }]
 //});
+////
+//		google.charts.load('current', {'packages':['corechart']});
+//		 google.charts.setOnLoadCallback(drawChart2);
 //
-		google.charts.load('current', {'packages':['corechart']});
-		 google.charts.setOnLoadCallback(drawChart2);
-		 
-		 function drawChart2(){
-			 
-			 var data= google.visualization.arrayToDataTable([
-				['Store','Today','Yesterday'],
-				 ['Target',50,30],
-				 ['Costco',70,73],
-				 ['Walmart',36,30]
-				
-			 ]);
-			 
-			 var options = {
-        title: 'Customers visiting different stores',
-				 'width':1000,
-                       'height':400,
-        chartArea: {width: '50%'},
-        hAxis: {
-          title: 'Total Customers',
-          minValue: 0,
-          textStyle: {
-            bold: false,
-            fontSize: 12,
-            color: '#4d4d4d'
-          },
-          titleTextStyle: {
-            bold: true,
-            fontSize: 18,
-            color: '#4d4d4d'
-          }
-        },
-        vAxis: {
-          title: 'Store',
-          textStyle: {
-            fontSize: 14,
-            bold: true,
-            color: '#848484'
-          },
-          titleTextStyle: {
-            fontSize: 18,
-            bold: true,
-            color: '#848484'
-          }
-        }
-      };
-		var chart = new google.visualization.BarChart(document.getElementById('pastchart2'));
-      chart.draw(data, options);	 
-		 }
-		 Highcharts.chart('pastchart3', {
-    chart: {
-        type: 'bar'
-    },
-    title: {
-        text: 'Stacked bar chart'
-    },
-    xAxis: {
-        categories: ['Food', 'Cosmetics', 'Electronics', 'Foot wear', 'Clothes']
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Total Sales'
-        }
-    },
-    legend: {
-        reversed: false
-    },
-    plotOptions: {
-        series: {
-            stacking: 'normal'
-        }
-    },
-    series: [{
-        name: 'Traget',
-        data: [5, 8, 4, 7, 6]
-    }, {
-        name: 'Costco',
-        data: [10, 2, 8, 2, 5]
-    }, {
-        name: 'Walmart',
-        data: [7, 4, 4, 4, 4]
-    }]
-});
-		 
-    		 
+//		 function drawChart2(){
+//
+//			 var data= google.visualization.arrayToDataTable([
+//				['Store','Today','Yesterday'],
+//				 ['Target',50,30],
+//				 ['Costco',70,73],
+//				 ['Walmart',36,30]
+//
+//			 ]);
+//
+//			 var options = {
+//        title: 'Customers visiting different stores',
+//				 'width':1000,
+//                       'height':400,
+//        chartArea: {width: '50%'},
+//        hAxis: {
+//          title: 'Total Customers',
+//          minValue: 0,
+//          textStyle: {
+//            bold: false,
+//            fontSize: 12,
+//            color: '#4d4d4d'
+//          },
+//          titleTextStyle: {
+//            bold: true,
+//            fontSize: 18,
+//            color: '#4d4d4d'
+//          }
+//        },
+//        vAxis: {
+//          title: 'Store',
+//          textStyle: {
+//            fontSize: 14,
+//            bold: true,
+//            color: '#848484'
+//          },
+//          titleTextStyle: {
+//            fontSize: 18,
+//            bold: true,
+//            color: '#848484'
+//          }
+//        }
+//      };
+//		var chart = new google.visualization.BarChart(document.getElementById('pastchart2'));
+//      chart.draw(data, options);
+//		 }
+//		 Highcharts.chart('pastchart3', {
+//    chart: {
+//        type: 'bar'
+//    },
+//    title: {
+//        text: 'Stacked bar chart'
+//    },
+//    xAxis: {
+//        categories: ['Food', 'Cosmetics', 'Electronics', 'Foot wear', 'Clothes']
+//    },
+//    yAxis: {
+//        min: 0,
+//        title: {
+//            text: 'Total Sales'
+//        }
+//    },
+//    legend: {
+//        reversed: false
+//    },
+//    plotOptions: {
+//        series: {
+//            stacking: 'normal'
+//        }
+//    },
+//    series: [{
+//        name: 'Traget',
+//        data: [5, 8, 4, 7, 6]
+//    }, {
+//        name: 'Costco',
+//        data: [10, 2, 8, 2, 5]
+//    }, {
+//        name: 'Walmart',
+//        data: [7, 4, 4, 4, 4]
+//    }]
+//});
+//
+//
     </script>
 
 <div id="google_translate_element"></div>

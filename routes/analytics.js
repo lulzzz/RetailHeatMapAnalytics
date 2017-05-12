@@ -14,6 +14,66 @@ function getRandomInt(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
 }
+exports.getcategory=function(req,res){
+
+
+    var start = new Date(req.param('dated'));
+    var end = new Date(req.param('dated'));
+    start.setHours(0);
+    start.setMinutes(0);
+    end.setHours(23);
+    end.setMinutes(59);
+
+
+
+    mongo.connect(mongoURL, function(){
+        console.log('Connected to mongo at: ' + mongoURL);
+        if(store=="target")
+            var coll = mongo.collection('analyticstarget');
+        else if(store=="costco")
+            var coll = mongo.collection('analyticscostco');
+        else
+            var coll = mongo.collection('analyticswalmart');
+        coll.aggregate([ {$match:{"timestamp":{$gte: new Date(start), $lte: new Date(end)}}},{$unwind: "$product"},
+            {$group: {          "_id":null,
+                "jeans": {$sum: "$product.jeans" },
+                "shirts": {$sum: "$product.shirts" },
+                "polos": {$sum: "$product.polos" },
+                "watches": {$sum: "$product.watches" },
+                "bags": {$sum: "$product.bags" },
+                "shoes": {$sum: "$product.shoes" },
+                "sweaters": {$sum: "$product.sweaters" },     }}
+        ]).toArray(function(err, result){
+            if(result)
+            {
+                var output=[
+                    {"name":"jeans","y":result[0].jeans},
+                    {"name":"bags","y":result[0].bags},
+                    {"name":"watches","y":result[0].watches},
+                    {"name":"shirts","y":result[0].shirts},
+                    {"name":"polos","y":result[0].polos},
+                    {"name":"sweaters","y":result[0].sweaters},
+                    {"name":"shoes","y":result[0].shoes},
+
+                ];
+
+                console.log(output);
+                res.status(200).send(output);
+            }
+            else
+            {
+                console.log(err);
+                res.status(401).send("Failed");
+
+            }
+
+        });
+
+    });
+
+
+
+};
 exports.productCatalog=function(req,res){
     var store=req.param('store');
 
@@ -58,35 +118,18 @@ exports.productCatalog=function(req,res){
 
 
 
-res.status(200).send(products);
+    res.status(200).send(products);
 
 };
-exports.getanalyticsdaily=function(req,res){
+exports.person=function(req,res){
 
-     var store=req.param('storename');
-     console.log(store);
-     var d = new Date(req.param('dated'));
-     console.log(d);
-     res.status(200).send({"result":"Success"})
+    var data=[['Store','Today','Yesterday'],
+        ['Target',getRandomInt(30,50),getRandomInt(40,60)],
+        ['Costco',getRandomInt(40,80),getRandomInt(50,70)],
+        ['Walmart',getRandomInt(50,80),getRandomInt(30,90)]]
+    res.status(200).send(data);
 
-    // mongo.connect(mongoURL, function(){
-    //     console.log('Connected to mongo at: ' + mongoURL);
-    //     var coll = mongo.collection('analyticsdaily');
-    //     coll.find({"store":store}).toArray(function(err, user){
-    //         if(user)
-    //         {
-    //
-    //             res.status(200).send({"result":user});
-    //         }
-    //         else
-    //         {
-    //             res.status(401).send({"status":"Failed"});
-    //
-    //         }
-    //
-    //     });
-    //
-    // });
+
 
 
 };
@@ -105,7 +148,7 @@ exports.getProduct=function(req,res){
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         if(store=="target")
-        var coll = mongo.collection('analyticstarget');
+            var coll = mongo.collection('analyticstarget');
         else if(store=="costco")
             var coll = mongo.collection('analyticscostco');
         else
@@ -196,5 +239,21 @@ exports.getperson=function(req,res){
 
 
 
+};
+
+exports.category=function(req,res){
+
+    var series=
+        [{
+            name: 'Target',
+            data: [getRandomInt(12,25), getRandomInt(12,17), getRandomInt(16,23), getRandomInt(12,23), getRandomInt(5,16)]
+        }, {
+            name: 'Costco',
+            data: [getRandomInt(30,45), getRandomInt(16,29), getRandomInt(24,36), getRandomInt(34,48), getRandomInt(10,24)]
+        }, {
+            name: 'Walmart',
+            data: [getRandomInt(23,43), getRandomInt(32,39), getRandomInt(12,22), getRandomInt(14,28), getRandomInt(8,19)]
+        }];
+    res.status(200).send(series);
 };
 

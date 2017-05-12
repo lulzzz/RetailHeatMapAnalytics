@@ -617,137 +617,45 @@ $(window).resize(function() {
 
 
 
-        $(".heatm").click(function(event) {
-
-console.log("",event.target.id);
-
- var _elem,_main;
- if(event.target.id== "costcoH")
- { _elem = 'cheatMap'; _main= '#costcoStoreMap'}
- else  if(event.target.id== "targetH")
-  {_elem = 'theatMap'; _main= '#targetStoreMap'}
- else if(event.target.id== "walmartH")
-  {_elem = 'wheatMap';_main= '#walmartStoreMap'}
-
-
-      scroll_to($(_main));
-			$(".tab-pane").addClass("fade");
-			console.log(_main +" .tab-pane");
-           $(_main +" .tab-pane").eq(1).removeClass("fade");
-            var config = {
-                container: document.getElementById(_elem),
-                radius: 17,
-                maxOpacity: 1,
-                minOpacity: 0,
-                blur: .5,
-            };
-            var heatmapInstance = h337.create(config);
-
-            var testData = {
-                min: 0,
-                max: 5,
-                data: [{
-                    x: 500,
-                    y: 430,
-                    value: 1
-                }, {
-                    x: 501,
-                    y: 431,
-                    value: 1
-                }, {
-                    x: 502,
-                    y: 432,
-                    value: 1
-                }, {
-                    x: 503,
-                    y: 433,
-                    value: 1
-                }, {
-                    x: 504,
-                    y: 434,
-                    value: 1
-                }, {
-                    x: 505,
-                    y: 435,
-                    value: 1
-                }, {
-                    x: 506,
-                    y: 436,
-                    value: 1
-                }]
-            };
-            heatmapInstance.setData(testData);
-
-            for (i = 0; i < 5; i++) {
-                var dataPoints = [{
-                    x: 120,
-                    y: 505,
-                    value: 1
-                }, {
-                    x: 597,
-                    y: 285,
-                    value: 1
-                }, {
-                    x: 217,
-                    y: 449,
-                    value: 1
-                }, {
-                    x: 377,
-                    y: 656,
-                    value: 1
-                }, {
-                    x: 467,
-                    y: 509,
-                    value: 1
-                }, {
-                    x: 487,
-                    y: 164,
-                    value: 1
-                }, {
-                    x: 247,
-                    y: 194,
-                    value: 1
-                }, {
-                    x: 809,
-                    y: 584,
-                    value: 1
-                }, {
-                    x: 500,
-                    y: 250,
-                    value: 1
-                }, {
-                    x: 207,
-                    y: 430,
-                    value: 1
-                }, {
-                    x: 388,
-                    y: 565,
-                    value: 1
-                }, {
-                    x: 476,
-                    y: 519,
-                    value: 1
-                }, {
-                    x: 400,
-                    y: 264,
-                    value: 1
-                }, {
-                    x: 257,
-                    y: 231,
-                    value: 1
-                }]
-
-                function getRandomIndex(low, high) {
-                    return Math.floor(Math.random() * (high - low + 1) + low);
-                }
-                var getrandomDensity = [dataPoints[getRandomIndex(0, 13)], dataPoints[getRandomIndex(0, 13)], dataPoints[getRandomIndex(0, 13)]]
-
-                heatmapInstance.addData(getrandomDensity);
-
-            }
-
-
-        });
+    $(".heatm").click(function(event) {
+        console.log("",event.target.id);
+        var _elem,_main;
+        if(event.target.id== "costcoH")
+        { _elem = 'cheatMap'; _main= '#costcoStoreMap'
+            store = "costco";
+        }
+        else  if(event.target.id== "targetH")
+        {_elem = 'theatMap'; _main= '#targetStoreMap'
+            store = "target";
+        }
+        else if(event.target.id== "walmartH")
+        {_elem = 'wheatMap';_main= '#walmartStoreMap'
+            store = "walmart";
+        }
+        scroll_to($(_main));
+        $(".tab-pane").addClass("fade");
+        console.log(_main +" .tab-pane");
+        $(_main +" .tab-pane").eq(1).removeClass("fade");
+        var config = {
+            container: document.getElementById(_elem),
+            radius: 17,
+            maxOpacity: 1,
+            minOpacity: 0,
+            blur: .5,
+        };
+        var heatmapInstance = h337.create(config);
+        $.post( "http://localhost:3000/getcurrentheatmap", { "storename": store})
+            .done(function( response ) {
+                console.log(response);
+                currentheatmapdata=response[0].coord;
+                var testData = {
+                    min: 0,
+                    max: 5,
+                    data: currentheatmapdata
+                };
+                heatmapInstance.setData(testData);
+            });
+    });
     </script>
     <script>
         //http://zreference.com/raphael-animation-along-a-path/

@@ -1,9 +1,11 @@
 var ang= angular.module("prod",[]);
 ang.controller("ProdController", function($scope,$http, $location, $anchorScroll){
     $anchorScroll.yOffset = 75;
+    $scope.numberofperson=[['Store','Today','Yesterday']];
     $scope.getAnalysis=function(){
         // alert(document.getElementById("datepicker").value);
         $scope.showModal=false;
+
         var d = new Date(document.getElementById("datepicker").value);
         var data={"storename":$scope.storeName,"dated":d};
         $http.post('/analyticsProduct', data).then(function (response) {
@@ -15,51 +17,111 @@ ang.controller("ProdController", function($scope,$http, $location, $anchorScroll
         });
         $http.post('/getheatmapdaily', data).then(function (response) {
 // This function handles success
-            console.log(response.data);
-            // alert(response.data[0].coord)
-
-            var config = {
-                container: document.getElementById('heatMap'),
-                radius: 17,
-                maxOpacity: 1,
-                minOpacity: 0,
-                blur: .5,
-
-            };
-            var heatmapInstance = h337.create(config);
-
-            var testData = {
-                min: 0,
-                max: 5,
-                data: response.data[0].coord
-            };
-            heatmapInstance.setData(testData);
-
-            for (i=0;i<5;i++){
-
-                var dataPoints = [{x: 120, y: 305, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 76, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 256, y: 201, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 130, value: 1}, {x: 88, y: 321, value: 1}, {x: 176, y: 219, value: 1}, {x: 300, y: 264, value: 1}, {x: 57, y: 231, value: 1} ]
-
-                var dataPoints = [{x: 120, y: 505, value: 1}, {x: 597, y: 285, value: 1}, {x: 217, y: 449, value: 1}, {x: 377, y: 656, value: 1}, {x: 467, y: 509, value: 1}, {x: 487, y: 164, value: 1}, {x: 247, y: 194, value: 1},{x: 809, y: 584, value: 1}, {x: 500, y: 250, value: 1}, {x: 207, y: 430, value: 1}, {x: 388, y: 565, value: 1}, {x: 476, y: 519, value: 1}, {x: 400, y: 264, value: 1}, {x: 257, y: 231, value: 1} ]
-
-                function getRandomIndex (low, high) {
-                    return Math.floor(Math.random() * (high - low + 1) + low);
-                }
-                var getrandomDensity = [dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)],dataPoints[getRandomIndex(0,13)]]
-
-                heatmapInstance.addData(getrandomDensity);
-
-            }
-
+            $scope.dataheatmap=response.data;
+            $scope.heatmaptimeline(0);
 
             //$scope.ShowHide($scope.storeName,$scope.storeImg,response);
         }, function (response) {
             alert(error);
 // this function handles error
         });
+
     }
 
+
+    $scope.heatmaptimeline=function(hourtime) {
+
+
+        var testData = {
+            min: 0,
+            max: 5,
+            data: $scope.dataheatmap[hourtime].coord
+        };
+        heatmapInstance.setData(testData);
+    }
     $scope.IsVisible = false;
     $scope.ShowHide = function (storename,storeimg,response) {
+        $http.get('/category').then(function(response){
+
+            Highcharts.chart('pastchart3', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Stacked bar chart'
+                },
+                xAxis: {
+                    categories: ['Food', 'Cosmetics', 'Electronics', 'Foot wear', 'Clothes']
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Total Sales'
+                    }
+                },
+                legend: {
+                    reversed: false
+                },
+                plotOptions: {
+                    series: {
+                        stacking: 'normal'
+                    }
+                },
+                series: response.data
+            });
+
+        });
+        $http.get('/person').then(function (response) {
+
+            $scope.numberofperson=response.data;
+            google.charts.load('current', {'packages':['corechart']});
+            google.charts.setOnLoadCallback(drawChart2);
+
+            function drawChart2(){
+
+                var data= google.visualization.arrayToDataTable($scope.numberofperson);
+
+
+                var options = {
+                    title: 'Customers visiting different stores',
+                    'width':1000,
+                    'height':400,
+                    chartArea: {width: '50%'},
+                    hAxis: {
+                        title: 'Total Customers',
+                        minValue: 0,
+                        textStyle: {
+                            bold: false,
+                            fontSize: 12,
+                            color: '#4d4d4d'
+                        },
+                        titleTextStyle: {
+                            bold: true,
+                            fontSize: 18,
+                            color: '#4d4d4d'
+                        }
+                    },
+                    vAxis: {
+                        title: 'Store',
+                        textStyle: {
+                            fontSize: 14,
+                            bold: true,
+                            color: '#848484'
+                        },
+                        titleTextStyle: {
+                            fontSize: 18,
+                            bold: true,
+                            color: '#848484'
+                        }
+                    }
+                };
+                var chart = new google.visualization.BarChart(document.getElementById('pastchart2'));
+                chart.draw(data, options);
+            }
+        }, function (response) {
+            alert(error);
+
+        });
         console.log(response.data);
         Highcharts.chart('pastchart1', {
             chart: {
@@ -118,7 +180,25 @@ ang.controller("ProdController", function($scope,$http, $location, $anchorScroll
         $scope.costcoMap=true;
         $scope.bimage ={backgroundImage: "url('images/"+ store+"')" };
     }
-
+//     $scopoe.currentheatmap=function(store){
+//         var data={"storename":store};
+//         $http.post('/getcurrentheatmap', data).then(function (response) {
+// // This function handles success
+//             $scope.currentdata=response.data[0].coord;
+//             var testData = {
+//                 min: 0,
+//                 max: 5,
+//                 data: $scope.dataheatmap[hourtime].coord
+//             };
+//             heatmapInstance.setData(testData);
+//
+//             //$scope.ShowHide($scope.storeName,$scope.storeImg,response);
+//         }, function (response) {
+//             alert(error);
+// // this function handles error
+//         });
+//
+//     }
     $scope.costcoStore = function(){
         $("#costcoNavBar").addClass("active");
         $("#targetNavBar").removeClass("active");

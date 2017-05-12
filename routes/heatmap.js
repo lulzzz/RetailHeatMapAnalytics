@@ -4,6 +4,8 @@
 var mongo = require("./mongo");
 var mongoURL = "mongodb://cmpe280:cmpe280@ds129281.mlab.com:29281/cmpe280";
 var ejs = require('ejs');
+var h = 08;
+var m = 30;
 
 // exports.getmonthly=function(req,res){
 //
@@ -60,20 +62,19 @@ var ejs = require('ejs');
 //
 //
 // };
-exports.gethourly=function(req,res){
+exports.getCurrent=function(req,res){
 
     var store=req.param('storename');
 
-    console.log(new Date("2017-05-01T16:30:11.480Z").getHours())
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
         var coll = mongo.collection('heatmapdaily');
-        coll.find({"timestamp":new Date("2017-05-01T16:30:47.344Z"),"store":store}).toArray(function(err, user){
-            if(user)
+        coll.find({"store":store}).sort({timestamp:1}).toArray(function(err, result){
+            if(result)
             {
 
 
-                res.status(200).send({"result":user});
+                res.status(200).send(result);
             }
             else
             {
@@ -90,12 +91,19 @@ exports.gethourly=function(req,res){
 exports.getdaily=function(req,res){
 
     var store=req.param('storename').toLowerCase();
+
     var start = new Date(req.param('dated'));
     var end = new Date(req.param('dated'));
+    start.setDate(1);
     start.setHours(0);
     start.setMinutes(0);
+    start.setMonth(05);
+    end.setDate(1);
     end.setHours(23);
     end.setMinutes(59);
+    end.setMonth(05);
+    console.log(start);
+    console.log(end);
 
 
     mongo.connect(mongoURL, function(){
@@ -121,9 +129,9 @@ exports.getdaily=function(req,res){
 };
 exports.postdaily=function(req,res){
 
-        var store=req.param('storename');
-        
-        var coord=req.param('coord');
+    var store=req.param('storename');
+
+    var coord=req.param('coord');
 
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
@@ -153,154 +161,14 @@ exports.postdaily=function(req,res){
 };
 exports.postrandom=function(req,res){
 
-    var store="costco";
-    var coord=[
-        {
-            "x": 408.1,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 566.3,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 195.2,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 304.2,
-            "y": 241.3,
-            "value": 1
-        },
-        {
-            "x": 275.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 406.3,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 179.3,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 157.5,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 287.2,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 454.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 408.1,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 566.3,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 195.2,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 304.2,
-            "y": 241.3,
-            "value": 1
-        },
-        {
-            "x": 275.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 406.3,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 179.3,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 157.5,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 287.2,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 454.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 409.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 177.5,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 179.3,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 157.5,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 287.2,
-            "y": 40,
-            "value": 1
-        },
-        {
-            "x": 454.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 409.2,
-            "y": 160,
-            "value": 1
-        },
-        {
-            "x": 177.5,
-            "y": 40,
-            "value": 1
-        }
-    ];
-
+    var store=req.param("storename");
+    var coord=req.param("coord");
     var d = new Date();
-    d.setDate(1);
-    d.setHours(09);
-    d.setMinutes(30);
+    h=h+1;
+    d.setDate(5);
+    d.setMonth(05);
+    d.setHours(h);
+    d.setMinutes(m);
 
     mongo.connect(mongoURL, function(){
         console.log('Connected to mongo at: ' + mongoURL);
